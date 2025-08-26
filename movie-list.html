@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie List - Movify</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/movie-list.css" />
+  <link rel="preload" href="src/assets/fonts/QuicksandRegular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandSemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandBold.ttf" as="font" type="font/ttf" crossorigin>
+  <style>
+    /* Fix scrolling issues completely */
+    html {
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      height: auto !important;
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      position: relative;
+    }
+    
+    /* Ensure no navigation interference */
+    body.nav-open {
+      overflow-y: visible !important;
+    }
+    
+    main {
+      display: block;
+      width: 100%;
+      overflow: visible;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading__container">
+      <img src="src/assets/svg/logo-white.svg" alt="Movify" class="loading__logo">
+      <div class="loading__spinner"></div>
+      <div class="loading__text" id="loadingText">Loading Movies...</div>
+      <div class="loading__progress">
+        <div class="loading__progress-bar" id="loadingProgressBar"></div>
+      </div>
+      <div class="loading__dots">
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="nav" id="siteNav">
+  <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Movify home">
+        <img src="src/assets/svg/logo-white.svg" alt="Movify" class="nav__logo-img" />
+      </a>
+    <div class="nav__menu" id="mainMenu" role="navigation" aria-label="Primary" aria-hidden="true">
+          <ul class="nav__list" aria-label="Main navigation">
+            <li class="nav__item">
+              <a class="nav__link" href="index.html">Home</a>
+            </li>
+            <li class="nav__item nav__item--has-children">
+              <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Pages <span class="nav__caret" aria-hidden="true"></span></button>
+              <ul class="nav__sub" aria-label="Pages submenu">
+                <li class="nav__sub-item"><a class="nav__sub-link" href="celebrities.html">Celebrities</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="coming-soon.html">Coming Soon</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Pricing</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Detail</a></li>
+              </ul>
+            </li>
+            <li class="nav__item nav__item--has-children">
+              <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Movies &amp; TV Shows <span class="nav__caret" aria-hidden="true"></span></button>
+              <ul class="nav__sub" aria-label="Movies &amp; TV Shows submenu">
+                <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Plan</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-list.html">Movie List</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Movie</a></li>
+              </ul>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="profile.html">Profile</a>
+            </li>
+          </ul>
+        </div>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search" id="globalSearchBtn">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="nav__icon-btn nav__icon-btn--notify" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><path d="M12 2a6 6 0 0 0-6 6v3.586l-.707 1.707A1 1 0 0 0 6.21 15h11.58a1 1 0 0 0 .917-1.707L18 11.586V8a6 6 0 0 0-6-6Z" fill="currentColor"/><path d="M10 19a2 2 0 1 0 4 0h-4Z" fill="currentColor"/></svg>
+          <span class="nav__badge" aria-label="2 notifications">2</span>
+        </button>
+        <a href="#login" class="nav__login-btn">
+          <svg viewBox="0 0 24 24" class="nav__login-icon" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-9 9a9 9 0 0 1 18 0Z" fill="currentColor"/></svg>
+          Log In
+        </a>
+        <button class="nav__menu-btn" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="nav__menu-line" aria-hidden="true"></span>
+          <span class="nav__menu-line" aria-hidden="true"></span>
+          <span class="nav__menu-line" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="nav__search" id="navSearchForm" role="search" aria-label="Site search">
+    <div class="nav__search-container">
+      <button class="nav__search-close" id="searchCloseBtn" aria-label="Close search">×</button>
+      <input id="navSearchInput" class="nav__search-input" type="search" placeholder="Search for movies, TV shows, celebrities..." aria-label="Search query" />
+      <div class="nav__search-hint">Press Enter to search or Escape to close</div>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- Movie List Hero Section -->
+    <section class="movie-hero">
+      <div class="movie-hero__inner">
+        <nav class="movie-hero__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" class="movie-hero__breadcrumb-link">Home</a>
+          <span class="movie-hero__breadcrumb-separator">/</span>
+          <span class="movie-hero__breadcrumb-current">Movie List 1</span>
+        </nav>
+        <h1 class="movie-hero__title">Movie List 1</h1>
+      </div>
+    </section>
+
+    <!-- Movie Filter Section -->
+    <section class="movie-filter">
+      <div class="movie-filter__inner">
+        <div class="movie-filter__controls">
+          <div class="movie-filter__dropdown">
+            <select class="movie-filter__select" id="sortOrder">
+              <option value="default">Default Order</option>
+              <option value="featured">Featured</option>
+              <option value="top-viewed">Top Viewed</option>
+              <option value="top-rated">Top Rated</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+            </select>
+          </div>
+          <div class="movie-filter__view-toggle">
+            <button class="movie-filter__view-btn movie-filter__view-btn--active" data-view="grid" aria-label="Grid view">
+              <svg viewBox="0 0 24 24" class="movie-filter__view-icon">
+                <rect x="3" y="3" width="7" height="7" rx="1" fill="currentColor"/>
+                <rect x="14" y="3" width="7" height="7" rx="1" fill="currentColor"/>
+                <rect x="3" y="14" width="7" height="7" rx="1" fill="currentColor"/>
+                <rect x="14" y="14" width="7" height="7" rx="1" fill="currentColor"/>
+              </svg>
+            </button>
+            <button class="movie-filter__view-btn" data-view="list" aria-label="List view">
+              <svg viewBox="0 0 24 24" class="movie-filter__view-icon">
+                <rect x="3" y="6" width="18" height="4" rx="1" fill="currentColor"/>
+                <rect x="3" y="14" width="18" height="4" rx="1" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Movie List Section -->
+    <section class="movie-list">
+      <div class="movie-list__inner">
+        <!-- Grid View -->
+        <div class="movie-list__container movie-list__container--grid" id="gridView">
+          <div class="movie-list__grid">
+            <!-- Star Wars Movie Card -->
+            <article class="movie-card" data-category="featured" data-rating="4" data-date="2020">
+              <div class="movie-card__poster">
+                <img src="src/assets/images/poster-1.jpg" alt="Star Wars" class="movie-card__image">
+                <div class="movie-card__overlay">
+                  <div class="movie-card__content">
+                    <h3 class="movie-card__title">Star Wars</h3>
+                    <p class="movie-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="movie-card__rating">
+                      <div class="movie-card__stars">
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star">★</span>
+                      </div>
+                    </div>
+                    <a href="movie-detail.html" class="movie-card__button">DETAILS</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- The Brain Movie Card -->
+            <article class="movie-card" data-category="top-viewed" data-rating="4" data-date="2019">
+              <div class="movie-card__poster">
+                <img src="src/assets/images/poster-2.jpg" alt="The Brain" class="movie-card__image">
+                <div class="movie-card__overlay">
+                  <div class="movie-card__content">
+                    <h3 class="movie-card__title">The Brain</h3>
+                    <p class="movie-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="movie-card__rating">
+                      <div class="movie-card__stars">
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star">★</span>
+                      </div>
+                    </div>
+                    <button class="movie-card__button">DETAILS</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- The Mummy Movie Card -->
+            <article class="movie-card" data-category="top-rated" data-rating="5" data-date="2021">
+              <div class="movie-card__poster">
+                <img src="src/assets/images/poster-3.jpg" alt="The Mummy" class="movie-card__image">
+                <div class="movie-card__overlay">
+                  <div class="movie-card__content">
+                    <h3 class="movie-card__title">The Mummy</h3>
+                    <p class="movie-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="movie-card__rating">
+                      <div class="movie-card__stars">
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                      </div>
+                    </div>
+                    <button class="movie-card__button">DETAILS</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Daredevil Movie Card -->
+            <article class="movie-card" data-category="newest" data-rating="5" data-date="2023">
+              <div class="movie-card__poster">
+                <img src="src/assets/images/poster-4.jpg" alt="Daredevil" class="movie-card__image">
+                <div class="movie-card__overlay">
+                  <div class="movie-card__content">
+                    <h3 class="movie-card__title">Daredevil</h3>
+                    <p class="movie-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="movie-card__rating">
+                      <div class="movie-card__stars">
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                      </div>
+                    </div>
+                    <button class="movie-card__button">DETAILS</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Stranger Things Movie Card -->
+            <article class="movie-card" data-category="featured" data-rating="4" data-date="2022">
+              <div class="movie-card__poster">
+                <img src="src/assets/images/poster-5.jpg" alt="Stranger Things" class="movie-card__image">
+                <div class="movie-card__overlay">
+                  <div class="movie-card__content">
+                    <h3 class="movie-card__title">Stranger Things</h3>
+                    <p class="movie-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="movie-card__rating">
+                      <div class="movie-card__stars">
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star">★</span>
+                      </div>
+                    </div>
+                    <button class="movie-card__button">DETAILS</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- The Flash Movie Card -->
+            <article class="movie-card" data-category="oldest" data-rating="4" data-date="2018">
+              <div class="movie-card__poster">
+                <img src="src/assets/images/poster-6.jpg" alt="The Flash" class="movie-card__image">
+                <div class="movie-card__overlay">
+                  <div class="movie-card__content">
+                    <h3 class="movie-card__title">The Flash</h3>
+                    <p class="movie-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <div class="movie-card__rating">
+                      <div class="movie-card__stars">
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star movie-card__star--filled">★</span>
+                        <span class="movie-card__star">★</span>
+                      </div>
+                    </div>
+                    <button class="movie-card__button">DETAILS</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- List View -->
+        <div class="movie-list__container movie-list__container--list" id="listView" style="display: none;">
+          <div class="movie-list__list">
+            <!-- Star Wars Movie List Item -->
+            <article class="movie-list-item" data-category="featured" data-rating="4" data-date="2020">
+              <div class="movie-list-item__poster">
+                <img src="src/assets/images/poster-1.jpg" alt="Star Wars" class="movie-list-item__image">
+              </div>
+              <div class="movie-list-item__content">
+                <div class="movie-list-item__header">
+                  <h3 class="movie-list-item__title">Star Wars</h3>
+                  <div class="movie-list-item__meta">
+                    <span class="movie-list-item__year">2020</span>
+                    <span class="movie-list-item__duration">2h 15min</span>
+                  </div>
+                </div>
+                <p class="movie-list-item__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="movie-list-item__footer">
+                  <div class="movie-list-item__rating">
+                    <div class="movie-list-item__stars">
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star">★</span>
+                    </div>
+                    <span class="movie-list-item__rating-text">4.0</span>
+                  </div>
+                  <button class="movie-list-item__button">WATCH NOW</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- The Brain Movie List Item -->
+            <article class="movie-list-item" data-category="top-viewed" data-rating="4" data-date="2019">
+              <div class="movie-list-item__poster">
+                <img src="src/assets/images/poster-2.jpg" alt="The Brain" class="movie-list-item__image">
+              </div>
+              <div class="movie-list-item__content">
+                <div class="movie-list-item__header">
+                  <h3 class="movie-list-item__title">The Brain</h3>
+                  <div class="movie-list-item__meta">
+                    <span class="movie-list-item__year">2019</span>
+                    <span class="movie-list-item__duration">1h 58min</span>
+                  </div>
+                </div>
+                <p class="movie-list-item__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="movie-list-item__footer">
+                  <div class="movie-list-item__rating">
+                    <div class="movie-list-item__stars">
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star">★</span>
+                    </div>
+                    <span class="movie-list-item__rating-text">4.0</span>
+                  </div>
+                  <button class="movie-list-item__button">WATCH NOW</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- The Mummy Movie List Item -->
+            <article class="movie-list-item" data-category="top-rated" data-rating="5" data-date="2021">
+              <div class="movie-list-item__poster">
+                <img src="src/assets/images/poster-3.jpg" alt="The Mummy" class="movie-list-item__image">
+              </div>
+              <div class="movie-list-item__content">
+                <div class="movie-list-item__header">
+                  <h3 class="movie-list-item__title">The Mummy</h3>
+                  <div class="movie-list-item__meta">
+                    <span class="movie-list-item__year">2021</span>
+                    <span class="movie-list-item__duration">2h 05min</span>
+                  </div>
+                </div>
+                <p class="movie-list-item__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="movie-list-item__footer">
+                  <div class="movie-list-item__rating">
+                    <div class="movie-list-item__stars">
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                    </div>
+                    <span class="movie-list-item__rating-text">5.0</span>
+                  </div>
+                  <button class="movie-list-item__button">WATCH NOW</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Daredevil Movie List Item -->
+            <article class="movie-list-item" data-category="newest" data-rating="5" data-date="2023">
+              <div class="movie-list-item__poster">
+                <img src="src/assets/images/poster-4.jpg" alt="Daredevil" class="movie-list-item__image">
+              </div>
+              <div class="movie-list-item__content">
+                <div class="movie-list-item__header">
+                  <h3 class="movie-list-item__title">Daredevil</h3>
+                  <div class="movie-list-item__meta">
+                    <span class="movie-list-item__year">2023</span>
+                    <span class="movie-list-item__duration">2h 20min</span>
+                  </div>
+                </div>
+                <p class="movie-list-item__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="movie-list-item__footer">
+                  <div class="movie-list-item__rating">
+                    <div class="movie-list-item__stars">
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                    </div>
+                    <span class="movie-list-item__rating-text">5.0</span>
+                  </div>
+                  <button class="movie-list-item__button">WATCH NOW</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Stranger Things Movie List Item -->
+            <article class="movie-list-item" data-category="featured" data-rating="4" data-date="2022">
+              <div class="movie-list-item__poster">
+                <img src="src/assets/images/poster-5.jpg" alt="Stranger Things" class="movie-list-item__image">
+              </div>
+              <div class="movie-list-item__content">
+                <div class="movie-list-item__header">
+                  <h3 class="movie-list-item__title">Stranger Things</h3>
+                  <div class="movie-list-item__meta">
+                    <span class="movie-list-item__year">2022</span>
+                    <span class="movie-list-item__duration">1h 45min</span>
+                  </div>
+                </div>
+                <p class="movie-list-item__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="movie-list-item__footer">
+                  <div class="movie-list-item__rating">
+                    <div class="movie-list-item__stars">
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star">★</span>
+                    </div>
+                    <span class="movie-list-item__rating-text">4.0</span>
+                  </div>
+                  <button class="movie-list-item__button">WATCH NOW</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- The Flash Movie List Item -->
+            <article class="movie-list-item" data-category="oldest" data-rating="4" data-date="2018">
+              <div class="movie-list-item__poster">
+                <img src="src/assets/images/poster-6.jpg" alt="The Flash" class="movie-list-item__image">
+              </div>
+              <div class="movie-list-item__content">
+                <div class="movie-list-item__header">
+                  <h3 class="movie-list-item__title">The Flash</h3>
+                  <div class="movie-list-item__meta">
+                    <span class="movie-list-item__year">2018</span>
+                    <span class="movie-list-item__duration">2h 12min</span>
+                  </div>
+                </div>
+                <p class="movie-list-item__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div class="movie-list-item__footer">
+                  <div class="movie-list-item__rating">
+                    <div class="movie-list-item__stars">
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star movie-list-item__star--filled">★</span>
+                      <span class="movie-list-item__star">★</span>
+                    </div>
+                    <span class="movie-list-item__rating-text">4.0</span>
+                  </div>
+                  <button class="movie-list-item__button">WATCH NOW</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="movie-pagination">
+          <button class="movie-pagination__btn movie-pagination__btn--active" aria-label="Page 1">1</button>
+          <button class="movie-pagination__btn" aria-label="Page 2">2</button>
+          <button class="movie-pagination__btn movie-pagination__btn--next" aria-label="Next page">
+            <svg viewBox="0 0 24 24" class="movie-pagination__icon">
+              <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__content">
+        <!-- Brand Column -->
+        <div class="footer__brand">
+          <img src="src/assets/svg/logo-white.svg" alt="Movify" class="footer__logo" />
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam vitae suscipit convallis, enim lacus vehicula libero, et cursus ipsum tortor non mauris. Phasellus tempor magna sit amet dignissim vulputate.
+          </p>
+        </div>
+
+        <!-- Useful Links Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Useful Links</h3>
+          <ul class="footer__list">
+            <li><a href="#" class="footer__link">About Movify</a></li>
+            <li><a href="#" class="footer__link">Blog</a></li>
+            <li><a href="#" class="footer__link">Forum</a></li>
+            <li><a href="#" class="footer__link">My Account</a></li>
+            <li><a href="#" class="footer__link">Watch List</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest News Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Latest News</h3>
+          <div class="footer__list">
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 1</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 2</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 3</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Follow Us Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Follow Us</h3>
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Twitter">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Google Plus">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.335 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.127-4.822 4.731-4.822 1.498 0 2.498.637 3.068 1.186l2.081-2.003c-1.332-1.248-3.059-2.001-5.149-2.001-4.253 0-7.7 3.451-7.7 7.64s3.447 7.64 7.7 7.64c4.441 0 7.387-3.104 7.387-7.478 0-.501-.054-.885-.12-1.266H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.182v2.184h2.183v-2.184H24v-2.181z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.448c0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297zm7.74 0c-1.297 0-2.448-.49-3.323-1.297-.875-.875-1.297-2.026-1.297-3.323 0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </main>
+
+  <script src="src/js/script.js"></script>
+  <script>
+    // View toggle functionality
+    const gridViewBtn = document.querySelector('[data-view="grid"]');
+    const listViewBtn = document.querySelector('[data-view="list"]');
+    const gridView = document.getElementById('gridView');
+    const listView = document.getElementById('listView');
+
+    gridViewBtn.addEventListener('click', function() {
+      // Toggle buttons
+      gridViewBtn.classList.add('movie-filter__view-btn--active');
+      listViewBtn.classList.remove('movie-filter__view-btn--active');
+      
+      // Toggle views
+      gridView.style.display = 'block';
+      listView.style.display = 'none';
+    });
+
+    listViewBtn.addEventListener('click', function() {
+      // Toggle buttons
+      listViewBtn.classList.add('movie-filter__view-btn--active');
+      gridViewBtn.classList.remove('movie-filter__view-btn--active');
+      
+      // Toggle views
+      gridView.style.display = 'none';
+      listView.style.display = 'block';
+    });
+
+    // Sorting functionality
+    const sortSelect = document.getElementById('sortOrder');
+    sortSelect.addEventListener('change', function() {
+      const sortValue = this.value;
+      const gridMovies = document.querySelectorAll('#gridView .movie-card');
+      const listMovies = document.querySelectorAll('#listView .movie-list-item');
+      
+      // Sort both views
+      sortMovies(gridMovies, sortValue);
+      sortMovies(listMovies, sortValue);
+    });
+
+    function sortMovies(movies, sortType) {
+      const movieArray = Array.from(movies);
+      const container = movies[0].parentNode;
+      
+      movieArray.sort((a, b) => {
+        switch(sortType) {
+          case 'featured':
+            return a.dataset.category === 'featured' ? -1 : 1;
+          case 'top-viewed':
+            return a.dataset.category === 'top-viewed' ? -1 : 1;
+          case 'top-rated':
+            return parseInt(b.dataset.rating) - parseInt(a.dataset.rating);
+          case 'newest':
+            return parseInt(b.dataset.date) - parseInt(a.dataset.date);
+          case 'oldest':
+            return parseInt(a.dataset.date) - parseInt(b.dataset.date);
+          default:
+            return 0;
+        }
+      });
+      
+      // Re-append sorted movies
+      movieArray.forEach(movie => container.appendChild(movie));
+    }
+
+    // Movie card hover effects
+    document.querySelectorAll('.movie-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.classList.add('movie-card--active');
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.classList.remove('movie-card--active');
+      });
+    });
+  </script>
+
+  <!-- Authentication Modals -->
+  <!-- Sign In Modal -->
+  <div class="modal" id="signInModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN IN</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signInForm">
+        <div class="modal__field">
+          <label for="signInEmail" class="modal__label">Username or Email *</label>
+          <input type="text" id="signInEmail" class="modal__input" placeholder="Your Username or Email *" required>
+        </div>
+        <div class="modal__field">
+          <label for="signInPassword" class="modal__label">Password *</label>
+          <input type="password" id="signInPassword" class="modal__input" placeholder="Your Password *" required>
+        </div>
+        <div class="modal__checkbox">
+          <input type="checkbox" id="keepSignedIn" class="modal__checkbox-input">
+          <label for="keepSignedIn" class="modal__checkbox-label">Keep me signed in</label>
+        </div>
+        <button type="submit" class="modal__submit">SIGN IN</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signUpModal">Not a member? Sign up</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal" id="signUpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN UP</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signUpForm">
+        <div class="modal__field">
+          <label for="signUpUsername" class="modal__label">Username</label>
+          <input type="text" id="signUpUsername" class="modal__input" placeholder="Username" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpEmail" class="modal__label">Email</label>
+          <input type="email" id="signUpEmail" class="modal__input" placeholder="Email" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpPassword" class="modal__label">Password</label>
+          <input type="password" id="signUpPassword" class="modal__input" placeholder="Password" required>
+        </div>
+        <button type="submit" class="modal__submit">REGISTER</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Already have an account? Sign in</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal" id="forgotPasswordModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">FORGOTTEN PASSWORD</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="forgotPasswordForm">
+        <div class="modal__field">
+          <label for="forgotEmail" class="modal__label">Email Address *</label>
+          <input type="email" id="forgotEmail" class="modal__input" placeholder="Email Address *" required>
+        </div>
+        <button type="submit" class="modal__submit">GET NEW PASSWORD</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- OTP Verification Modal -->
+  <div class="modal" id="otpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">VERIFY YOUR EMAIL</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="otpForm">
+        <div class="modal__message">
+          <p>We've sent a verification code to your email address. Please enter the 6-digit code below to complete your registration.</p>
+        </div>
+        <div class="modal__field">
+          <label for="otpCode" class="modal__label">Verification Code *</label>
+          <div class="otp-input-container">
+            <input type="text" maxlength="1" class="otp-input" data-index="0" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="1" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="2" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="3" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="4" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="5" required>
+          </div>
+        </div>
+        <button type="submit" class="modal__submit">VERIFY EMAIL</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" id="resendOtp">Didn't receive code? Resend</a>
+          <a href="#" class="modal__link" data-modal="signUpModal">Back to Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* Statistics Section (BEM: .statistics) */
+.statistics {
+  position: relative;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #8d38c9 0%, #bc4086 50%, #d63384 100%);
+  color: white;
+}
+
+.statistics__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.statistics__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  text-align: center;
+}
+
+.statistics__item {
+  position: relative;
+}
+
+.statistics__number {
+  font-family: 'QuicksandBold';
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: white;
+  letter-spacing: -1px;
+}
+
+.statistics__label {
+  font-family: 'QuicksandSemiBold';
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .statistics {
+    padding: 3rem 0;
+  }
+  
+  .statistics__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .statistics__number {
+    font-size: 2.2rem;
+  }
+  
+  .statistics__label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics__inner {
+    padding: 0 1rem;
+  }
+  
+  .statistics__number {
+    font-size: 2rem;
+  }
+  
+  .statistics__label {
+    font-size: 0.8rem;
+  }
+}

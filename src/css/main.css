@@ -1,0 +1,21 @@
+@import url(./root.css);
+@import url(./components/pricing.css);
+@import url(./components/modal.css);
+
+/* Base Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body { min-height:100vh; background:#0b0b0f; color:#fff; font-family:'QuicksandRegular', system-ui, sans-serif; line-height:1.5; overflow-x:hidden; }
+body.nav-open { overflow:hidden; }
+img { max-width:100%; display:block; }
+button { font:inherit; }
+a { color:inherit; }
+::selection { background:#8d38c9; color:#fff; }
+
+/* Utility */
+.u-hidden { display:none !important; }
+
+/* Prevent horizontal scrolling issues */
+main, section { position:relative; width:100%; overflow-x:hidden; }
+
+

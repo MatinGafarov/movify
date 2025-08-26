@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celebrities - Movify</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/celebrities.css" />
+  <link rel="preload" href="src/assets/fonts/QuicksandRegular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandSemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <style>
+    /* Fix scrolling issues completely */
+    html {
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      height: auto !important;
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      position: relative;
+    }
+    
+    /* Ensure no navigation interference */
+    body.nav-open {
+      overflow-y: visible !important;
+    }
+    
+    /* Make sure main content is scrollable */
+    main {
+      display: block;
+      width: 100%;
+      overflow: visible;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading__container">
+      <img src="src/assets/svg/logo-white.svg" alt="Movify" class="loading__logo">
+      <div class="loading__spinner"></div>
+      <div class="loading__text" id="loadingText">Loading Celebrities...</div>
+      <div class="loading__progress">
+        <div class="loading__progress-bar" id="loadingProgressBar"></div>
+      </div>
+      <div class="loading__dots">
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="nav" id="siteNav">
+  <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Movify home">
+        <img src="src/assets/svg/logo-white.svg" alt="Movify" class="nav__logo-img" />
+      </a>
+    <div class="nav__menu" id="mainMenu" role="navigation" aria-label="Primary" aria-hidden="true">
+          <ul class="nav__list" aria-label="Main navigation">
+            <li class="nav__item">
+              <a class="nav__link" href="index.html">Home</a>
+            </li>
+            <li class="nav__item nav__item--has-children">
+              <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Pages <span class="nav__caret" aria-hidden="true"></span></button>
+              <ul class="nav__sub" aria-label="Pages submenu">
+                <li class="nav__sub-item"><a class="nav__sub-link" href="celebrities.html">Celebrities</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="coming-soon.html">Coming Soon</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Pricing</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Detail</a></li>
+              </ul>
+            </li>
+            <li class="nav__item nav__item--has-children">
+              <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Movies &amp; TV Shows <span class="nav__caret" aria-hidden="true"></span></button>
+              <ul class="nav__sub" aria-label="Movies &amp; TV Shows submenu">
+                <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Plan</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-list.html">Movie List</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Movie</a></li>
+              </ul>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="profile.html">Profile</a>
+            </li>
+          </ul>
+        </div>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search" id="globalSearchBtn">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="nav__icon-btn nav__icon-btn--notify" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><path d="M12 2a6 6 0 0 0-6 6v3.586l-.707 1.707A1 1 0 0 0 6.21 15h11.58a1 1 0 0 0 .917-1.707L18 11.586V8a6 6 0 0 0-6-6Z" fill="currentColor"/><path d="M10 19a2 2 0 1 0 4 0h-4Z" fill="currentColor"/></svg>
+          <span class="nav__badge" aria-label="2 notifications">2</span>
+        </button>
+        <a href="#login" class="nav__login-btn">
+          <svg viewBox="0 0 24 24" class="nav__login-icon" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-9 9a9 9 0 0 1 18 0Z" fill="currentColor"/></svg>
+          <span>Login</span>
+        </a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainMenu">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="nav__search" id="navSearchForm" role="search" aria-label="Site search">
+    <div class="nav__search-container">
+      <button class="nav__search-close" id="searchCloseBtn" aria-label="Close search">×</button>
+      <input id="navSearchInput" class="nav__search-input" type="search" placeholder="Search for movies, TV shows, celebrities..." aria-label="Search query" />
+      <div class="nav__search-hint">Press Enter to search or Escape to close</div>
+    </div>
+  </div>
+
+  <!-- Celebrities Hero Section -->
+  <section class="celebrities-hero">
+    <div class="celebrities-hero__inner">
+      <div class="celebrities-hero__breadcrumb">
+        <a href="index.html" class="celebrities-hero__breadcrumb-link">Home</a>
+        <span class="celebrities-hero__breadcrumb-separator">|</span>
+        <span class="celebrities-hero__breadcrumb-current">Celebrities</span>
+      </div>
+      <h1 class="celebrities-hero__title">Celebrities</h1>
+    </div>
+  </section>
+
+  <!-- Celebrities Content Section -->
+  <section class="celebrities-content">
+    <div class="celebrities-content__inner">
+      <div class="celebrities-content__header">
+        <div class="celebrities-content__filter">
+          <select class="celebrities-content__select">
+            <option value="default" selected>Default Order</option>
+            <option value="featured">Featured</option>
+            <option value="top-viewed">Top Viewed</option>
+            <option value="top-rated">Top Rated</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="celebrities-grid">
+        <!-- Celebrity 1 -->
+        <div class="celebrity-card">
+          <div class="celebrity-card__image">
+            <img src="src/assets/images/poster-1.jpg" alt="Bryan Doe" class="celebrity-card__img" />
+          </div>
+          <div class="celebrity-card__content">
+            <h3 class="celebrity-card__name">Bryan Doe</h3>
+            <p class="celebrity-card__bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus at lorem sed scelerisque. Proin 
+              suscipit scelerisque ex, nec finibus ante malesuada a.
+            </p>
+          </div>
+        </div>
+
+        <!-- Celebrity 2 -->
+        <div class="celebrity-card">
+          <div class="celebrity-card__image">
+            <img src="src/assets/images/poster-2.jpg" alt="Baron Soul" class="celebrity-card__img" />
+          </div>
+          <div class="celebrity-card__content">
+            <h3 class="celebrity-card__name">Baron Soul</h3>
+            <p class="celebrity-card__bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus at lorem sed scelerisque. Proin 
+              suscipit scelerisque ex, nec finibus ante malesuada a.
+            </p>
+          </div>
+        </div>
+
+        <!-- Celebrity 3 -->
+        <div class="celebrity-card">
+          <div class="celebrity-card__image">
+            <img src="src/assets/images/poster-3.jpg" alt="Enoch Actor" class="celebrity-card__img" />
+          </div>
+          <div class="celebrity-card__content">
+            <h3 class="celebrity-card__name">Enoch Actor</h3>
+            <p class="celebrity-card__bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus at lorem sed scelerisque. Proin 
+              suscipit scelerisque ex, nec finibus ante malesuada a.
+            </p>
+          </div>
+        </div>
+
+        <!-- Celebrity 4 -->
+        <div class="celebrity-card">
+          <div class="celebrity-card__image">
+            <img src="src/assets/images/poster-4.jpg" alt="Nicole Best" class="celebrity-card__img" />
+          </div>
+          <div class="celebrity-card__content">
+            <h3 class="celebrity-card__name">Nicole Best</h3>
+            <p class="celebrity-card__bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus at lorem sed scelerisque. Proin 
+              suscipit scelerisque ex, nec finibus ante malesuada a.
+            </p>
+          </div>
+        </div>
+
+        <!-- Celebrity 5 -->
+        <div class="celebrity-card">
+          <div class="celebrity-card__image">
+            <img src="src/assets/images/poster-5.jpg" alt="Normon Cape" class="celebrity-card__img" />
+          </div>
+          <div class="celebrity-card__content">
+            <h3 class="celebrity-card__name">Normon Cape</h3>
+            <p class="celebrity-card__bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus at lorem sed scelerisque. Proin 
+              suscipit scelerisque ex, nec finibus ante malesuada a.
+            </p>
+          </div>
+        </div>
+
+        <!-- Celebrity 6 -->
+        <div class="celebrity-card">
+          <div class="celebrity-card__image">
+            <img src="src/assets/images/poster-6.jpg" alt="Tiffany Smith" class="celebrity-card__img" />
+          </div>
+          <div class="celebrity-card__content">
+            <h3 class="celebrity-card__name">Tiffany Smith</h3>
+            <p class="celebrity-card__bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris cursus at lorem sed scelerisque. Proin 
+              suscipit scelerisque ex, nec finibus ante malesuada a.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="celebrities-pagination">
+        <button class="celebrities-pagination__btn celebrities-pagination__btn--active">1</button>
+        <button class="celebrities-pagination__btn">2</button>
+        <button class="celebrities-pagination__btn">3</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__content">
+        <!-- Brand Column -->
+        <div class="footer__brand">
+          <img src="src/assets/svg/logo-white.svg" alt="Movify" class="footer__logo" />
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam vitae suscipit convallis, enim lacus vehicula libero, et cursus ipsum tortor non mauris. Phasellus tempor magna sit amet dignissim vulputate.
+          </p>
+        </div>
+
+        <!-- Useful Links Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Useful Links</h3>
+          <ul class="footer__list">
+            <li><a href="#" class="footer__link">About Movify</a></li>
+            <li><a href="#" class="footer__link">Blog</a></li>
+            <li><a href="#" class="footer__link">Forum</a></li>
+            <li><a href="#" class="footer__link">My Account</a></li>
+            <li><a href="#" class="footer__link">Watch List</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest News Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Latest News</h3>
+          <div class="footer__list">
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 1</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 2</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 3</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Follow Us Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Follow Us</h3>
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Twitter">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Google Plus">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.335 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.127-4.822 4.731-4.822 1.498 0 2.498.637 3.068 1.186l2.081-2.003c-1.332-1.248-3.059-2.001-5.149-2.001-4.253 0-7.7 3.451-7.7 7.64s3.447 7.64 7.7 7.64c4.441 0 7.387-3.104 7.387-7.478 0-.501-.054-.885-.12-1.266H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.182v2.184h2.183v-2.184H24v-2.181z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.448c0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297zm7.74 0c-1.297 0-2.448-.49-3.323-1.297-.875-.875-1.297-2.026-1.297-3.323 0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Authentication Modals -->
+  <!-- Sign In Modal -->
+  <div class="modal" id="signInModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN IN</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signInForm">
+        <div class="modal__field">
+          <label for="signInEmail" class="modal__label">Username or Email *</label>
+          <input type="text" id="signInEmail" class="modal__input" placeholder="Your Username or Email *" required>
+        </div>
+        <div class="modal__field">
+          <label for="signInPassword" class="modal__label">Password *</label>
+          <input type="password" id="signInPassword" class="modal__input" placeholder="Your Password *" required>
+        </div>
+        <div class="modal__checkbox">
+          <input type="checkbox" id="keepSignedIn" class="modal__checkbox-input">
+          <label for="keepSignedIn" class="modal__checkbox-label">Keep me signed in</label>
+        </div>
+        <button type="submit" class="modal__submit">SIGN IN</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signUpModal">Not a member? Sign up</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal" id="signUpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN UP</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signUpForm">
+        <div class="modal__field">
+          <label for="signUpUsername" class="modal__label">Username</label>
+          <input type="text" id="signUpUsername" class="modal__input" placeholder="Username" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpEmail" class="modal__label">Email</label>
+          <input type="email" id="signUpEmail" class="modal__input" placeholder="Email" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpPassword" class="modal__label">Password</label>
+          <input type="password" id="signUpPassword" class="modal__input" placeholder="Password" required>
+        </div>
+        <button type="submit" class="modal__submit">REGISTER</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Already have an account? Sign in</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal" id="forgotPasswordModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">FORGOTTEN PASSWORD</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="forgotPasswordForm">
+        <div class="modal__field">
+          <label for="forgotEmail" class="modal__label">Email Address *</label>
+          <input type="email" id="forgotEmail" class="modal__input" placeholder="Email Address *" required>
+        </div>
+        <button type="submit" class="modal__submit">GET NEW PASSWORD</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- OTP Verification Modal -->
+  <div class="modal" id="otpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">VERIFY YOUR EMAIL</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="otpForm">
+        <div class="modal__message">
+          <p>We've sent a verification code to your email address. Please enter the 6-digit code below to complete your registration.</p>
+        </div>
+        <div class="modal__field">
+          <label for="otpCode" class="modal__label">Verification Code *</label>
+          <div class="otp-input-container">
+            <input type="text" maxlength="1" class="otp-input" data-index="0" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="1" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="2" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="3" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="4" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="5" required>
+          </div>
+        </div>
+        <button type="submit" class="modal__submit">VERIFY EMAIL</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" id="resendOtp">Didn't receive code? Resend</a>
+          <a href="#" class="modal__link" data-modal="signUpModal">Back to Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="src/js/script.js"></script>
+  <script>
+    // Force reset any navigation state issues
+    document.addEventListener('DOMContentLoaded', function() {
+      // Remove any stuck navigation classes
+      document.body.classList.remove('nav-open');
+      
+      // Reset navigation toggle state
+      const navToggle = document.getElementById('navToggle');
+      if (navToggle) {
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+      
+      // Reset menu state
+      const navMenu = document.getElementById('mainMenu');
+      if (navMenu) {
+        navMenu.classList.remove('nav__menu--open');
+        navMenu.setAttribute('aria-hidden', 'true');
+      }
+      
+      // Force proper scrolling
+      document.documentElement.style.overflowY = 'scroll';
+      document.body.style.overflowY = 'visible';
+      
+      // Test scroll function
+      window.testScroll = function() {
+        window.scrollTo({ top: 100, behavior: 'smooth' });
+      };
+      
+      console.log('Celebrities page loaded, scrolling should work now');
+    });
+  </script>
+</body>
+</html>

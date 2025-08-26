@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movify</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="preload" href="src/assets/fonts/QuicksandRegular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandSemiBold.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading__container">
+      <img src="src/assets/svg/logo-white.svg" alt="Movify" class="loading__logo">
+      <div class="loading__spinner"></div>
+      <div class="loading__text" id="loadingText">Loading...</div>
+      <div class="loading__progress">
+        <div class="loading__progress-bar" id="loadingProgressBar"></div>
+      </div>
+      <div class="loading__dots">
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="nav" id="siteNav">
+  <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="Movify home">
+        <img src="src/assets/svg/logo-white.svg" alt="Movify" class="nav__logo-img" />
+      </a>
+    <div class="nav__menu" id="mainMenu" role="navigation" aria-label="Primary" aria-hidden="true">
+          <ul class="nav__list" aria-label="Main navigation">
+            <li class="nav__item">
+              <a class="nav__link" href="index.html">Home</a>
+            </li>
+            <li class="nav__item nav__item--has-children">
+              <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Pages <span class="nav__caret" aria-hidden="true"></span></button>
+              <ul class="nav__sub" aria-label="Pages submenu">
+                <li class="nav__sub-item"><a class="nav__sub-link" href="celebrities.html">Celebrities</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="coming-soon.html">Coming Soon</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Pricing</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Detail</a></li>
+              </ul>
+            </li>
+            <li class="nav__item nav__item--has-children">
+              <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Movies &amp; TV Shows <span class="nav__caret" aria-hidden="true"></span></button>
+              <ul class="nav__sub" aria-label="Movies &amp; TV Shows submenu">
+                <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Plan</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-list.html">Movie List</a></li>
+                <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Movie</a></li>
+              </ul>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="contact.html">Contact Us</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="profile.html">Profile</a>
+            </li>
+          </ul>
+        </div>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search" id="globalSearchBtn">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="nav__icon-btn nav__icon-btn--notify" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><path d="M12 2a6 6 0 0 0-6 6v3.586l-.707 1.707A1 1 0 0 0 6.21 15h11.58a1 1 0 0 0 .917-1.707L18 11.586V8a6 6 0 0 0-6-6Z" fill="currentColor"/><path d="M10 19a2 2 0 1 0 4 0h-4Z" fill="currentColor"/></svg>
+          <span class="nav__badge" aria-label="2 notifications">2</span>
+        </button>
+        <a href="#login" class="nav__login-btn">
+          <svg viewBox="0 0 24 24" class="nav__login-icon" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-9 9a9 9 0 0 1 18 0Z" fill="currentColor"/></svg>
+          <span>Login</span>
+        </a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainMenu">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="nav__search" id="navSearchForm" role="search" aria-label="Site search">
+    <div class="nav__search-container">
+      <button class="nav__search-close" id="searchCloseBtn" aria-label="Close search">×</button>
+      <input id="navSearchInput" class="nav__search-input" type="search" placeholder="Search for movies, TV shows, celebrities..." aria-label="Search query" />
+      <div class="nav__search-hint">Press Enter to search or Escape to close</div>
+    </div>
+  </div>
+
+  <!-- Hero Slider -->
+  <section class="hero" id="hero" aria-label="Featured content">
+    <div class="hero__slides" id="heroSlides">
+      <div class="hero__slide hero__slide--active" data-index="0" style="background-image:url('src/assets/images/slider1.jpg')">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1 class="hero__title">START STREAMING NOW</h1>
+          <form class="hero__search" role="search" aria-label="Search movies or series">
+            <label for="heroSearchInput" class="hero__search-label">Enter Movies or Series Title</label>
+            <input id="heroSearchInput" class="hero__search-input" type="search" placeholder="Enter Movies or Series Title" />
+            <button class="hero__search-btn" type="submit" aria-label="Search">
+              <svg viewBox="0 0 24 24" class="hero__search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="hero__slide" data-index="1" style="background-image:url('src/assets/images/slider2.jpg')">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1 class="hero__title">ULTRA HD RESOLUTION</h1>
+          <form class="hero__search" role="search" aria-label="Search movies or series">
+            <label for="heroSearchInput2" class="hero__search-label">Enter Movies or Series Title</label>
+            <input id="heroSearchInput2" class="hero__search-input" type="search" placeholder="Search great titles" />
+            <button class="hero__search-btn" type="submit" aria-label="Search">
+              <svg viewBox="0 0 24 24" class="hero__search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="hero__slide" data-index="2" style="background-image:url('src/assets/images/slider3.jpg')">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <h1 class="hero__title">LATEST MOVIES & SERIES</h1>
+          <form class="hero__search" role="search" aria-label="Search movies or series">
+            <label for="heroSearchInput3" class="hero__search-label">Enter Movies or Series Title</label>
+            <input id="heroSearchInput3" class="hero__search-input" type="search" placeholder="Find something new" />
+            <button class="hero__search-btn" type="submit" aria-label="Search">
+              <svg viewBox="0 0 24 24" class="hero__search-icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="hero__dots" id="heroDots" role="tablist" aria-label="Hero slide selection">
+      <button class="hero__dot hero__dot--active" data-slide="0" aria-label="Slide 1" aria-selected="true"></button>
+      <button class="hero__dot" data-slide="1" aria-label="Slide 2" aria-selected="false"></button>
+      <button class="hero__dot" data-slide="2" aria-label="Slide 3" aria-selected="false"></button>
+    </div>
+  </section>
+
+  <!-- Featured Catalog Section (Latest first) -->
+  <section class="catalog" id="featured" aria-labelledby="featuredHeading">
+    <div class="catalog__inner">
+      <div class="catalog__header">
+        <h2 class="catalog__heading" id="featuredHeading">Latest Movies &amp; Series</h2>
+        <a href="#" class="catalog__view-all" aria-label="View all movies and series">
+          VIEW ALL
+          <svg viewBox="0 0 24 24" class="catalog__view-all-icon" aria-hidden="true">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="catalog__viewport">
+        <div class="catalog__track" id="catalogTrack">
+          <article class="card" aria-labelledby="card1Title" data-video="dQw4w9WgXcQ">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 4.5 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">4.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-1.jpg" alt="Featured item 1" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card1Title">Movie Title 1</h3>
+                  <p class="card__info">Action • 2024</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card2Title" data-video="M7lc1UVf-VE">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 4 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">4/5</span>
+              </div>
+              <img src="src/assets/images/poster-2.jpg" alt="Featured item 2" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card2Title">Movie Title 2</h3>
+                  <p class="card__info">Drama • 2023</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card3Title" data-video="XfR9iY5y94s">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 5 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">5/5</span>
+              </div>
+              <img src="src/assets/images/poster-3.jpg" alt="Featured item 3" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card3Title">Movie Title 3</h3>
+                  <p class="card__info">Sci-Fi • 2025</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card4Title" data-video="QH2-TGUlwu4">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 3.5 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">3.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-4.jpg" alt="Featured item 4" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card4Title">Movie Title 4</h3>
+                  <p class="card__info">Thriller • 2024</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card5Title" data-video="YQHsXMglC9A">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 4 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">4/5</span>
+              </div>
+              <img src="src/assets/images/poster-5.jpg" alt="Featured item 5" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card5Title">Movie Title 5</h3>
+                  <p class="card__info">Adventure • 2022</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card6Title" data-video="kJQP7kiw5Fk">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 3 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">3/5</span>
+              </div>
+              <img src="src/assets/images/poster-6.jpg" alt="Featured item 6" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card6Title">Movie Title 6</h3>
+                  <p class="card__info">Comedy • 2023</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card7Title" data-video="hFZFjoX2cGg">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 4.5 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">4.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-7.jpg" alt="Featured item 7" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card7Title">Movie Title 7</h3>
+                  <p class="card__info">Fantasy • 2024</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-labelledby="card8Title" data-video="6JnN1DmbqoU">
+            <div class="card__media">
+              <div class="card__rating" aria-label="Rating: 2.5 out of 5">
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="card__star card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="card__rating-text">2.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-8.jpg" alt="Featured item 8" class="card__img" loading="lazy" />
+              <div class="card__overlay">
+                <button class="card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <div class="card__meta">
+                  <h3 class="card__title" id="card8Title">Movie Title 8</h3>
+                  <p class="card__info">Horror • 2025</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <!-- Navigation arrows -->
+      <div class="catalog__nav" id="catalogNav">
+        <button class="catalog__btn catalog__btn--prev" id="catalogPrev" aria-label="Previous movies">
+          <svg viewBox="0 0 24 24" class="catalog__btn-icon" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/></svg>
+        </button>
+        <button class="catalog__btn catalog__btn--next" id="catalogNext" aria-label="Next movies">
+          <svg viewBox="0 0 24 24" class="catalog__btn-icon" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Upcoming Section (after latest) -->
+  <section class="upcoming" id="upcoming" aria-labelledby="upcomingHeading">
+    <div class="upcoming__inner">
+      <h2 class="upcoming__heading" id="upcomingHeading">Upcoming Movies &amp; TV Shows</h2>
+      <div class="upcoming__grid">
+        <!-- Featured large item -->
+        <article class="upcoming__featured" data-video="Q0CbN8sfihY" tabindex="0" aria-label="Play Epic Saga Continues trailer">
+          <img src="src/assets/images/upcoming-featured-item.jpg" alt="Epic Saga Continues poster" class="upcoming__img upcoming__img--featured" loading="lazy" />
+          <div class="upcoming__overlay" aria-hidden="true"></div>
+          <div class="upcoming__content">
+            <h3 class="upcoming__title">Epic Saga Continues</h3>
+            <p class="upcoming__meta">Cinematic Event · Trailer</p>
+            <button class="upcoming__play" aria-label="Play trailer" data-video-trigger>
+              <svg class="upcoming__play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </article>
+        <!-- Right column top card -->
+        <article class="upcoming__card" data-video="Q0CbN8sfihY" tabindex="0" aria-label="Play Sci‑Fi Worlds teaser">
+          <img src="src/assets/images/upcoming-item-1.jpg" alt="Sci‑Fi Worlds teaser image" class="upcoming__img" loading="lazy" />
+          <div class="upcoming__overlay" aria-hidden="true"></div>
+          <div class="upcoming__content">
+            <h3 class="upcoming__title">Sci‑Fi Worlds</h3>
+            <p class="upcoming__meta">Teaser · 2025</p>
+            <button class="upcoming__play" aria-label="Play teaser" data-video-trigger>
+              <svg class="upcoming__play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </article>
+        <!-- Right column bottom card -->
+        <article class="upcoming__card" data-video="Q0CbN8sfihY" tabindex="0" aria-label="Play Drama Stories teaser">
+          <img src="src/assets/images/upcoming-item-2.jpg" alt="Drama Stories teaser image" class="upcoming__img" loading="lazy" />
+          <div class="upcoming__overlay" aria-hidden="true"></div>
+          <div class="upcoming__content">
+            <h3 class="upcoming__title">Drama Stories</h3>
+            <p class="upcoming__meta">Teaser · 2025</p>
+            <button class="upcoming__play" aria-label="Play teaser" data-video-trigger>
+              <svg class="upcoming__play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+    <!-- TV Shows Slider Section -->
+  <section class="tv" id="tvShows" aria-labelledby="tvHeading">
+    <div class="tv__inner">
+      <div class="tv__header">
+        <h2 class="tv__heading" id="tvHeading">Popular TV Shows</h2>
+        <a href="#" class="tv__view-all" aria-label="View all TV shows">
+          VIEW ALL
+          <svg viewBox="0 0 24 24" class="tv__view-all-icon" aria-hidden="true">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="tv__viewport">
+        <div class="tv__track" id="tvTrack">
+          <!-- 8 sample shows (will slide, 4 visible on wide screens) -->
+          <article class="tv-card" aria-labelledby="tv1Title" data-video="dQw4w9WgXcQ">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 4.5 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">4.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-1.jpg" alt="Show 1 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv1Title">Show Title 1</h3>
+                <p class="tv-card__info">Season 2 • 2025</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv2Title" data-video="M7lc1UVf-VE">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 4 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">4/5</span>
+              </div>
+              <img src="src/assets/images/poster-2.jpg" alt="Show 2 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv2Title">Show Title 2</h3>
+                <p class="tv-card__info">Limited • 2024</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv3Title" data-video="XfR9iY5y94s">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 5 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">5/5</span>
+              </div>
+              <img src="src/assets/images/poster-3.jpg" alt="Show 3 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv3Title">Show Title 3</h3>
+                <p class="tv-card__info">Season 1 • 2025</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv4Title" data-video="QH2-TGUlwu4">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 3.5 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">3.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-4.jpg" alt="Show 4 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv4Title">Show Title 4</h3>
+                <p class="tv-card__info">Season 3 • 2024</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv5Title" data-video="YQHsXMglC9A">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 4 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">4/5</span>
+              </div>
+              <img src="src/assets/images/poster-5.jpg" alt="Show 5 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv5Title">Show Title 5</h3>
+                <p class="tv-card__info">Season 4 • 2023</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv6Title" data-video="kJQP7kiw5Fk">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 3 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">3/5</span>
+              </div>
+              <img src="src/assets/images/poster-6.jpg" alt="Show 6 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv6Title">Show Title 6</h3>
+                <p class="tv-card__info">Mini • 2024</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv7Title" data-video="hFZFjoX2cGg">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 4.5 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">4.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-7.jpg" alt="Show 7 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv7Title">Show Title 7</h3>
+                <p class="tv-card__info">Season 1 • 2025</p>
+              </div>
+            </div>
+          </article>
+          <article class="tv-card" aria-labelledby="tv8Title" data-video="6JnN1DmbqoU">
+            <div class="tv-card__media">
+              <div class="tv-card__rating" aria-label="Rating: 2.5 out of 5">
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24" class="tv-card__star tv-card__star--dim" aria-hidden="true"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="tv-card__rating-text">2.5/5</span>
+              </div>
+              <img src="src/assets/images/poster-8.jpg" alt="Show 8 poster" class="tv-card__img" loading="lazy" />
+              <div class="tv-card__overlay">
+                <button class="tv-card__play" aria-label="Play trailer">
+                  <svg viewBox="0 0 24 24" class="tv-card__play-icon" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                </button>
+                <h3 class="tv-card__title" id="tv8Title">Show Title 8</h3>
+                <p class="tv-card__info">Season 2 • 2023</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <!-- Navigation arrows -->
+      <div class="tv__nav" aria-hidden="true">
+        <button class="tv__btn" id="tvPrev" aria-label="Previous shows" disabled>
+          <svg viewBox="0 0 24 24" class="tv__btn-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+        </button>
+        <button class="tv__btn" id="tvNext" aria-label="Next shows">
+          <svg viewBox="0 0 24 24" class="tv__btn-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+        </button>
+      </div>
+      <div class="tv__dots" id="tvDots" role="tablist" aria-label="TV show carousel indicators"></div>
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section class="how-it-works" id="howItWorks" aria-labelledby="howItWorksHeading">
+    <div class="how-it-works__inner">
+      <div class="how-it-works__header">
+        <h2 class="how-it-works__title" id="howItWorksHeading">How it works?</h2>
+        <p class="how-it-works__subtitle">
+          We will show you step by step how to start watching your favorite movies &amp; 
+          TV shows from today
+        </p>
+      </div>
+      
+      <div class="how-it-works__steps">
+        <!-- Step 1: Create Account -->
+        <div class="how-it-works__step">
+          <div class="how-it-works__step-content">
+            <div class="how-it-works__step-number">1</div>
+            <h3 class="how-it-works__step-title">Create an account</h3>
+            <p class="how-it-works__step-description">
+              Create your account by filling out our simple registration form. 
+              Enter your email, create a secure password, and you're ready to start 
+              your journey with thousands of movies and TV shows.
+            </p>
+          </div>
+          <div class="how-it-works__step-visual">
+            <div class="how-it-works__signup-visual">
+              <img src="src/assets/images/signup.png" alt="Sign up form example" class="how-it-works__step-image" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Choose Plan -->
+        <div class="how-it-works__step">
+          <div class="how-it-works__step-content">
+            <div class="how-it-works__step-number">2</div>
+            <h3 class="how-it-works__step-title">Choose your Plan</h3>
+            <p class="how-it-works__step-description">
+              Select from our flexible subscription plans. Whether you want basic access 
+              or premium features with 4K streaming, we have the perfect plan for your 
+              entertainment needs and budget.
+            </p>
+          </div>
+          <div class="how-it-works__step-visual">
+            <div class="how-it-works__pricing-visual">
+              <img src="src/assets/images/pricing.png" alt="Pricing plans selection" class="how-it-works__step-image" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Enjoy -->
+        <div class="how-it-works__step">
+          <div class="how-it-works__step-content">
+            <div class="how-it-works__step-number">3</div>
+            <h3 class="how-it-works__step-title">Enjoy Movify</h3>
+            <p class="how-it-works__step-description">
+              That's it! Start streaming immediately after signup. Enjoy unlimited access 
+              to thousands of movies, TV shows, documentaries and more. Watch on any device, 
+              anywhere, anytime.
+            </p>
+          </div>
+          <div class="how-it-works__step-visual">
+            <div class="how-it-works__enjoy">
+              <div class="how-it-works__enjoy-visual">
+                <img src="src/assets/images/enjoy-movify.png" alt="Enjoy Movify experience" class="how-it-works__step-image" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Success Indicator -->
+      <div class="how-it-works__success">
+        <div class="how-it-works__success-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="how-it-works__success-text">Process Complete!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="statistics">
+    <div class="statistics__inner">
+      <div class="statistics__grid">
+        <div class="statistics__item" data-target="964">
+          <div class="statistics__number">0</div>
+          <div class="statistics__label">Movies</div>
+        </div>
+        <div class="statistics__item" data-target="743">
+          <div class="statistics__number">0</div>
+          <div class="statistics__label">TV Shows</div>
+        </div>
+        <div class="statistics__item" data-target="1207">
+          <div class="statistics__number">0</div>
+          <div class="statistics__label">Users</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing" aria-labelledby="pricingHeading">
+    <div class="pricing__inner">
+      <div class="pricing__header">
+        <h2 class="pricing__title" id="pricingHeading">Become a Premium Member</h2>
+        <p class="pricing__subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipiscing 
+          elit. Aenean commodo ligula eget dolor. Aenean 
+          massa. Cum sociis natoque penatibus et magnis dis 
+          parturient montes, nascetur ridiculus mus. Donec 
+          quam felis.
+        </p>
+      </div>
+      
+      <div class="pricing__cards">
+        <!-- Premium Plan Card -->
+        <div class="pricing__card pricing__card--premium">
+          <div class="pricing__card-badge">Most Popular</div>
+          <div class="pricing__card-header">
+            <h3 class="pricing__card-title">Premium Plan</h3>
+            <div class="pricing__card-price">
+              <span class="pricing__card-currency">$</span>
+              <span class="pricing__card-amount">19</span>
+              <span class="pricing__card-period">.99 / month</span>
+            </div>
+            <p class="pricing__card-description">Perfect for movie enthusiasts who want the ultimate experience</p>
+          </div>
+          
+          <div class="pricing__card-body">
+            <ul class="pricing__card-features">
+              <li>HD available <span class="pricing__card-feature-check">✓</span></li>
+              <li>Ultra HD available <span class="pricing__card-feature-check">✓</span></li>
+              <li>Unlimited Movies and TV Shows <span class="pricing__card-feature-check">✓</span></li>
+              <li>Watch on your phone & tablet <span class="pricing__card-feature-check">✓</span></li>
+              <li>Download and watch offline <span class="pricing__card-feature-check">✓</span></li>
+              <li>Screens you can watch <span class="pricing__card-feature-check">5</span></li>
+              <li>First Month Free <span class="pricing__card-feature-check">✓</span></li>
+            </ul>
+          </div>
+          
+          <div class="pricing__card-footer">
+            <button class="pricing__card-button">Choose Premium</button>
+          </div>
+        </div>
+
+        <!-- Basic Plan Card -->
+        <div class="pricing__card">
+          <div class="pricing__card-header">
+            <h3 class="pricing__card-title">Basic Plan</h3>
+            <div class="pricing__card-price">
+              <span class="pricing__card-currency">$</span>
+              <span class="pricing__card-amount">9</span>
+              <span class="pricing__card-period">.99 / month</span>
+            </div>
+            <p class="pricing__card-description">Great for casual viewers who want access to our content library</p>
+          </div>
+          
+          <div class="pricing__card-body">
+            <ul class="pricing__card-features">
+              <li>HD available <span class="pricing__card-feature-check">✓</span></li>
+              <li>Ultra HD available <span class="pricing__card-feature-cross">✗</span></li>
+              <li>Unlimited Movies and TV Shows <span class="pricing__card-feature-check">✓</span></li>
+              <li>Watch on your phone & tablet <span class="pricing__card-feature-cross">✗</span></li>
+              <li>Download and watch offline <span class="pricing__card-feature-cross">✗</span></li>
+              <li>Screens you can watch <span class="pricing__card-feature-check">1</span></li>
+              <li>First Month Free <span class="pricing__card-feature-check">✓</span></li>
+            </ul>
+          </div>
+          
+          <div class="pricing__card-footer">
+            <button class="pricing__card-button">Choose Basic</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="blog" id="blog" aria-labelledby="blogHeading">
+    <div class="blog__inner">
+      <div class="blog__header">
+        <h2 class="blog__title" id="blogHeading">Latest News</h2>
+        <p class="blog__subtitle">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam 
+          nonummy consectetur adipiscing.
+        </p>
+      </div>
+      
+      <div class="blog__grid">
+        <article class="blog-card">
+          <div class="blog-card__media">
+            <img src="src/assets/images/bloglist-1.jpg" alt="Top 10 Action Movies" class="blog-card__image" />
+            <div class="blog-card__overlay">
+              <div class="blog-card__play-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Top 10 Action Movies</h3>
+            <div class="blog-card__date">
+              <svg class="blog-card__date-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+              </svg>
+              01/02/2018
+            </div>
+            <p class="blog-card__excerpt">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+              inventore veritatis.
+            </p>
+            <a href="#" class="blog-card__read-more">
+              Read More
+              <svg class="blog-card__read-more-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+        
+        <article class="blog-card">
+          <div class="blog-card__media">
+            <img src="src/assets/images/bloglist-2.jpg" alt="Oscar Awards" class="blog-card__image" />
+            <div class="blog-card__overlay">
+              <div class="blog-card__play-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Oscar Awards</h3>
+            <div class="blog-card__date">
+              <svg class="blog-card__date-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+              </svg>
+              01/02/2018
+            </div>
+            <p class="blog-card__excerpt">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+              inventore veritatis.
+            </p>
+            <a href="#" class="blog-card__read-more">
+              Read More
+              <svg class="blog-card__read-more-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+        
+        <article class="blog-card">
+          <div class="blog-card__media">
+            <img src="src/assets/images/bloglist-3.jpg" alt="Top Upcoming Movies" class="blog-card__image" />
+            <div class="blog-card__overlay">
+              <div class="blog-card__play-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card__content">
+            <h3 class="blog-card__title">Top Upcoming Movies</h3>
+            <div class="blog-card__date">
+              <svg class="blog-card__date-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+              </svg>
+              01/02/2018
+            </div>
+            <p class="blog-card__excerpt">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
+              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
+              inventore veritatis.
+            </p>
+            <a href="#" class="blog-card__read-more">
+              Read More
+              <svg class="blog-card__read-more-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter" id="newsletter" aria-labelledby="newsletterHeading">
+    <div class="newsletter__inner">
+      <h2 class="newsletter__title" id="newsletterHeading">Join Movify Now!</h2>
+      <p class="newsletter__subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam 
+        nonummy consectetur adipiscing.
+      </p>
+      <form class="newsletter__form" aria-label="Newsletter subscription">
+        <input 
+          type="email" 
+          class="newsletter__input" 
+          placeholder="Your Email" 
+          required 
+          aria-label="Email address"
+        />
+        <button type="submit" class="newsletter__button">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__content">
+        <!-- Brand Column -->
+        <div class="footer__brand">
+          <img src="src/assets/svg/logo-white.svg" alt="Movify" class="footer__logo" />
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam vitae suscipit convallis, enim lacus vehicula libero, et cursus ipsum tortor non mauris. Phasellus tempor magna sit amet dignissim vulputate.
+          </p>
+        </div>
+
+        <!-- Useful Links Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Useful Links</h3>
+          <ul class="footer__list">
+            <li><a href="#" class="footer__link">About Movify</a></li>
+            <li><a href="#" class="footer__link">Blog</a></li>
+            <li><a href="#" class="footer__link">Forum</a></li>
+            <li><a href="#" class="footer__link">My Account</a></li>
+            <li><a href="#" class="footer__link">Watch List</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest News Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Latest News</h3>
+          <div class="footer__list">
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 1</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 2</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 3</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Follow Us Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Follow Us</h3>
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Twitter">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Google Plus">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.335 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.127-4.822 4.731-4.822 1.498 0 2.498.637 3.068 1.186l2.081-2.003c-1.332-1.248-3.059-2.001-5.149-2.001-4.253 0-7.7 3.451-7.7 7.64s3.447 7.64 7.7 7.64c4.441 0 7.387-3.104 7.387-7.478 0-.501-.054-.885-.12-1.266H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.182v2.184h2.183v-2.184H24v-2.181z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.448c0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297zm7.74 0c-1.297 0-2.448-.49-3.323-1.297-.875-.875-1.297-2.026-1.297-3.323 0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <div class="video-modal__dialog">
+      <button class="video-modal__close" id="videoModalClose" aria-label="Close video">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <iframe class="video-modal__iframe" id="videoFrame" title="YouTube video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Authentication Modals -->
+  <!-- Sign In Modal -->
+  <div class="modal" id="signInModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN IN</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signInForm">
+        <div class="modal__field">
+          <label for="signInEmail" class="modal__label">Username or Email *</label>
+          <input type="text" id="signInEmail" class="modal__input" placeholder="Your Username or Email *" required>
+        </div>
+        <div class="modal__field">
+          <label for="signInPassword" class="modal__label">Password *</label>
+          <input type="password" id="signInPassword" class="modal__input" placeholder="Your Password *" required>
+        </div>
+        <div class="modal__checkbox">
+          <input type="checkbox" id="keepSignedIn" class="modal__checkbox-input">
+          <label for="keepSignedIn" class="modal__checkbox-label">Keep me signed in</label>
+        </div>
+        <button type="submit" class="modal__submit">SIGN IN</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signUpModal">Not a member? Sign up</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal" id="signUpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN UP</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signUpForm">
+        <div class="modal__field">
+          <label for="signUpUsername" class="modal__label">Username</label>
+          <input type="text" id="signUpUsername" class="modal__input" placeholder="Username" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpEmail" class="modal__label">Email</label>
+          <input type="email" id="signUpEmail" class="modal__input" placeholder="Email" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpPassword" class="modal__label">Password</label>
+          <input type="password" id="signUpPassword" class="modal__input" placeholder="Password" required>
+        </div>
+        <button type="submit" class="modal__submit">REGISTER</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Already have an account? Sign in</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal" id="forgotPasswordModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">FORGOTTEN PASSWORD</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="forgotPasswordForm">
+        <div class="modal__field">
+          <label for="forgotEmail" class="modal__label">Email Address *</label>
+          <input type="email" id="forgotEmail" class="modal__input" placeholder="Email Address *" required>
+        </div>
+        <button type="submit" class="modal__submit">GET NEW PASSWORD</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- OTP Verification Modal -->
+  <div class="modal" id="otpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">VERIFY YOUR EMAIL</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="otpForm">
+        <div class="modal__message">
+          <p>We've sent a verification code to your email address. Please enter the 6-digit code below to complete your registration.</p>
+        </div>
+        <div class="modal__field">
+          <label for="otpCode" class="modal__label">Verification Code *</label>
+          <div class="otp-input-container">
+            <input type="text" maxlength="1" class="otp-input" data-index="0" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="1" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="2" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="3" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="4" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="5" required>
+          </div>
+        </div>
+        <button type="submit" class="modal__submit">VERIFY EMAIL</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" id="resendOtp">Didn't receive code? Resend</a>
+          <a href="#" class="modal__link" data-modal="signUpModal">Back to Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="src/js/script.js"></script>
+</body>
+</html>

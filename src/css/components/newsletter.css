@@ -1,0 +1,114 @@
+/* Newsletter Section (BEM: .newsletter) */
+.newsletter {
+  position: relative;
+  padding: 4rem 0;
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.newsletter__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.newsletter__title {
+  font-family: 'QuicksandSemiBold';
+  font-size: 2.2rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.newsletter__subtitle {
+  font-family: 'QuicksandRegular';
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0 auto 2.5rem;
+  max-width: 500px;
+}
+
+.newsletter__form {
+  display: flex;
+  align-items: stretch;
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px -4px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter__input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  outline: none;
+  font-family: 'QuicksandRegular';
+  font-size: 1rem;
+  color: #334155;
+  background: white;
+}
+
+.newsletter__input::placeholder {
+  color: #94a3b8;
+}
+
+.newsletter__button {
+  padding: 1rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background 180ms ease;
+  min-width: 120px;
+}
+
+.newsletter__button:hover {
+  background: var(--color-primary-accent);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .newsletter {
+    padding: 3rem 0;
+  }
+  
+  .newsletter__title {
+    font-size: 1.8rem;
+  }
+  
+  .newsletter__form {
+    flex-direction: column;
+    border-radius: 6px;
+  }
+  
+  .newsletter__input {
+    border-radius: 6px 6px 0 0;
+  }
+  
+  .newsletter__button {
+    border-radius: 0 0 6px 6px;
+    padding: 1.2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsletter__inner {
+    padding: 0 1rem;
+  }
+  
+  .newsletter__title {
+    font-size: 1.6rem;
+  }
+  
+  .newsletter__form {
+    max-width: 100%;
+  }
+}

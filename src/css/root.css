@@ -1,0 +1,26 @@
+@import url(./components/navbar.css);
+@import url(./components/hero.css);
+@import url(./components/footer.css);
+@import url(./components/catalog.css);
+@import url(./components/collection.css);
+@import url(./components/tvshows.css);
+@import url(./components/upcoming.css
+@import url(./components/howitworks.css);
+@import url(./components/statistics.css);
+@import url(./components/blog.css);
+@import url(./components/newsletter.css);
+@import url(./components/loading.css);
+
+@font-face { font-family: QuicksandBold; src: url(../assets/fonts/QuicksandBold.ttf) format('truetype'); font-weight:700; font-display:swap; }
+@font-face { font-family: QuicksandLight; src: url(../assets/fonts/QuicksandLight.ttf) format('truetype'); font-weight:300; font-display:swap; }
+@font-face { font-family: QuicksandMedium; src: url(../assets/fonts/QuicksandMedium.ttf) format('truetype'); font-weight:500; font-display:swap; }
+@font-face { font-family: QuicksandRegular; src: url(../assets/fonts/QuicksandRegular.ttf) format('truetype'); font-weight:400; font-display:swap; }
+@font-face { font-family: QuicksandSemiBold; src: url(../assets/fonts/QuicksandSemiBold.ttf) format('truetype'); font-weight:600; font-display:swap; }
+
+:root {
+    --color-primary:#8d38c9;
+    --color-primary-accent:#a44ae3;
+    --color-white:#ffffff;
+    --color-bg:#0b0b0f;
+    --ease-out: cubic-bezier(.19,1,.22,1);
+}

@@ -1,0 +1,298 @@
+/* How it Works Section (BEM: .how-it-works) */
+.how-it-works { 
+  position: relative; 
+  padding: 5rem 0; 
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+  color: #334155; 
+  overflow: hidden; 
+}
+
+.how-it-works__inner { 
+  max-width: 1320px; 
+  margin: 0 auto; 
+  padding: 0 2rem; 
+}
+
+.how-it-works__header { 
+  text-align: center; 
+  margin-bottom: 4rem; 
+}
+
+.how-it-works__title { 
+  font-family: 'QuicksandSemiBold'; 
+  font-size: 2.5rem; 
+  color: #1e293b; 
+  margin-bottom: 1rem; 
+  letter-spacing: -0.5px; 
+}
+
+.how-it-works__subtitle { 
+  font-family: 'QuicksandMedium'; 
+  font-size: 1.1rem; 
+  color: #64748b; 
+  max-width: 600px; 
+  margin: 0 auto; 
+  line-height: 1.6; 
+}
+
+.how-it-works__steps { 
+  display: grid; 
+  gap: 3rem; 
+  grid-template-columns: 1fr; 
+  position: relative; 
+}
+
+.how-it-works__step { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 3rem; 
+  align-items: center; 
+  position: relative; 
+}
+
+.how-it-works__step:nth-child(even) { 
+  direction: rtl; 
+}
+
+.how-it-works__step:nth-child(even) > * { 
+  direction: ltr; 
+}
+
+.how-it-works__step-content { 
+  position: relative; 
+}
+
+.how-it-works__step-number { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  width: 60px; 
+  height: 60px; 
+  background: var(--color-primary); 
+  color: white; 
+  border-radius: 50%; 
+  font-family: 'QuicksandBold'; 
+  font-size: 1.5rem; 
+  margin-bottom: 1.5rem; 
+}
+
+/* Different colors for each step */
+.how-it-works__step:nth-child(1) .how-it-works__step-number {
+  background: #3b82f6; /* Blue */
+}
+
+.how-it-works__step:nth-child(2) .how-it-works__step-number {
+  background: #f59e0b; /* Orange */
+}
+
+.how-it-works__step:nth-child(3) .how-it-works__step-number {
+  background: #10b981; /* Green */
+}
+
+.how-it-works__step-title { 
+  font-family: 'QuicksandSemiBold'; 
+  font-size: 1.8rem; 
+  color: #1e293b; 
+  margin-bottom: 1rem; 
+  letter-spacing: -0.25px; 
+}
+
+.how-it-works__step-description { 
+  font-family: 'QuicksandRegular'; 
+  font-size: 1rem; 
+  color: #64748b; 
+  line-height: 1.7; 
+  margin-bottom: 2rem; 
+}
+
+.how-it-works__step-visual { 
+  position: relative; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem; 
+}
+
+/* Step Visuals with Images */
+.how-it-works__step-image { 
+  width: 100%; 
+  height: auto; 
+  display: block; 
+  max-width: 100%;
+}
+
+.how-it-works__signup-visual, 
+.how-it-works__pricing-visual, 
+.how-it-works__enjoy-visual { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 200px; 
+}
+
+/* Remove old form and plan styles since we're using images */
+.how-it-works__enjoy { 
+  text-align: center; 
+  position: relative; 
+}
+
+/* Success Indicator */
+.how-it-works__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.how-it-works__success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.how-it-works__success-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.how-it-works__success-text {
+  font-family: 'QuicksandSemiBold';
+  font-size: 1.2rem;
+  color: #10b981;
+  margin: 0;
+}
+
+/* Connecting Lines */
+.how-it-works__step::after { 
+  content: ''; 
+  position: absolute; 
+  right: -1.5rem; 
+  top: 50%; 
+  width: 3rem; 
+  height: 2px; 
+  background: linear-gradient(90deg, var(--color-primary), transparent); 
+  transform: translateY(-50%); 
+  z-index: -1; 
+}
+
+.how-it-works__step:last-child::after { 
+  display: none; 
+}
+
+.how-it-works__step:nth-child(even)::after { 
+  left: -1.5rem; 
+  right: auto; 
+  background: linear-gradient(-90deg, var(--color-primary), transparent); 
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) { 
+  .how-it-works__step { 
+    grid-template-columns: 1fr; 
+    gap: 2rem; 
+    text-align: center; 
+  }
+  
+  .how-it-works__step:nth-child(even) { 
+    direction: ltr; 
+  }
+  
+  .how-it-works__step::after { 
+    display: none; 
+  }
+  
+  .how-it-works__signup-visual, 
+  .how-it-works__pricing-visual, 
+  .how-it-works__enjoy-visual { 
+    min-height: 180px; 
+  }
+  
+  .how-it-works__success {
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 768px) { 
+  .how-it-works { 
+    padding: 3rem 0; 
+  }
+  
+  .how-it-works__title { 
+    font-size: 2rem; 
+  }
+  
+  .how-it-works__step-title { 
+    font-size: 1.5rem; 
+  }
+  
+  .how-it-works__step-visual { 
+    padding: 1.5rem; 
+  }
+  
+  .how-it-works__signup-visual, 
+  .how-it-works__pricing-visual, 
+  .how-it-works__enjoy-visual { 
+    min-height: 160px; 
+  }
+  
+  .how-it-works__step-image { 
+    max-width: 100%; 
+    height: auto; 
+  }
+  
+  .how-it-works__success {
+    margin-top: 2.5rem;
+  }
+  
+  .how-it-works__success-icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .how-it-works__success-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) { 
+  .how-it-works__inner { 
+    padding: 0 1rem; 
+  }
+  
+  .how-it-works__step-visual { 
+    padding: 1rem; 
+  }
+  
+  .how-it-works__signup-visual, 
+  .how-it-works__pricing-visual, 
+  .how-it-works__enjoy-visual { 
+    min-height: 140px; 
+  }
+  
+  .how-it-works__success {
+    margin-top: 2rem;
+  }
+  
+  .how-it-works__success-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .how-it-works__success-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .how-it-works__success-text {
+    font-size: 1rem;
+  }
+}

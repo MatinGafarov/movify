@@ -1,0 +1,281 @@
+/* Coming Soon Page Styles */
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Main Coming Soon Container */
+.coming-soon {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background Image */
+.coming-soon__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/images/movie-collection.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Dark Overlay */
+.coming-soon__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+}
+
+/* Content Container */
+.coming-soon__content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+/* Logo */
+.coming-soon__logo {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.coming-soon__logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* Main Title */
+.coming-soon__title {
+  font-family: 'QuicksandRegular', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+/* Countdown Timer */
+.coming-soon__countdown {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.countdown-item__number {
+  font-family: 'QuicksandBold', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.countdown-item__label {
+  font-family: 'QuicksandSemiBold', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+/* Email Subscription */
+.coming-soon__subscription {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.subscription-form {
+  display: flex;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.subscription-form__input {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: none;
+  outline: none;
+  font-family: 'QuicksandRegular', sans-serif;
+  font-size: 1rem;
+  color: #334155;
+  background: transparent;
+}
+
+.subscription-form__input::placeholder {
+  color: #94a3b8;
+  font-family: 'QuicksandRegular', sans-serif;
+}
+
+.subscription-form__input:focus {
+  outline: none;
+}
+
+.subscription-form__button {
+  padding: 1rem 2rem;
+  background: #8d38c9;
+  color: white;
+  border: none;
+  font-family: 'QuicksandSemiBold', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  min-width: 140px;
+}
+
+.subscription-form__button:hover {
+  background: #a44ae3;
+  transform: translateY(-1px);
+}
+
+.subscription-form__button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coming-soon__content {
+    padding: 1.5rem;
+  }
+  
+  .coming-soon__title {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .coming-soon__logo {
+    margin-bottom: 2.5rem;
+  }
+  
+  .coming-soon__logo img {
+    height: 50px;
+  }
+  
+  .coming-soon__countdown {
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .countdown-item {
+    padding: 1.25rem 0.75rem;
+    min-width: 80px;
+  }
+  
+  .countdown-item__number {
+    font-size: 2rem;
+  }
+  
+  .countdown-item__label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon__content {
+    padding: 1rem;
+  }
+  
+  .coming-soon__title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .coming-soon__logo {
+    margin-bottom: 2rem;
+  }
+  
+  .coming-soon__logo img {
+    height: 40px;
+  }
+  
+  .coming-soon__countdown {
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .countdown-item {
+    padding: 1rem 0.5rem;
+    min-width: 70px;
+  }
+  
+  .countdown-item__number {
+    font-size: 1.75rem;
+  }
+  
+  .countdown-item__label {
+    font-size: 0.7rem;
+  }
+  
+  .subscription-form {
+    flex-direction: column;
+  }
+  
+  .subscription-form__input {
+    padding: 0.875rem 1rem;
+  }
+  
+  .subscription-form__button {
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+/* Animation for countdown numbers */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.countdown-item__number {
+  animation: pulse 2s ease-in-out infinite;
+}

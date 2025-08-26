@@ -1,0 +1,26 @@
+/* Hero Slider (BEM: .hero) */
+.hero { position:relative; width:100%; height:100vh; min-height:640px; overflow:hidden; font-family: 'QuicksandRegular', system-ui, sans-serif; }
+.hero__slides { width:100%; height:100%; position:relative; }
+.hero__slide { position:absolute; inset:0; background-size:cover; background-position:center var(--y, 0px); background-repeat:no-repeat; /* parallax handled via JS changing --y */ opacity:0; transform:scale(1.08); transition: opacity 900ms ease, transform 6000ms linear, background-position 60ms linear; display:flex; align-items:center; justify-content:center; will-change:background-position, transform; }
+.hero__slide--active { opacity:1; transform:scale(1); z-index:2; }
+.hero__overlay { position:absolute; inset:0; background:linear-gradient(120deg, rgba(141,56,201,0.78), rgba(188,64,134,0.82)); mix-blend-mode: multiply; }
+.hero__content { position:relative; z-index:3; text-align:center; max-width:900px; padding:0 1.25rem; }
+.hero__title { font-size: clamp(2.2rem, 4vw + 1rem, 3.75rem); text-transform:uppercase; letter-spacing:3px; line-height:1.1; color:#fff; font-family:'QuicksandSemiBold'; margin-bottom:2.5rem; }
+
+.hero__search { width:100%; max-width:880px; margin:0 auto; position:relative; display:flex; align-items:stretch; background:#fff; border-radius:4px; overflow:hidden; }
+.hero__search-label { position:absolute; left:-10000px; }
+.hero__search-input { flex:1; border:none; padding:1rem 1.25rem; font-size:1rem; outline:none; font-family:'QuicksandMedium'; }
+.hero__search-input::placeholder { color:#6b7280; }
+.hero__search-btn { width:70px; background:#8d38c9; border:none; display:grid; place-items:center; cursor:pointer; transition:background 180ms ease; }
+.hero__search-btn:hover { background:#a44ae3; }
+.hero__search-icon { width:22px; height:22px; color:#fff; }
+
+.hero__dots { position:absolute; top:50%; right:1.25rem; transform:translateY(-50%); display:flex; flex-direction:column; gap:.75rem; z-index:10; }
+.hero__dot { width:14px; height:14px; border-radius:50%; background:rgba(255,255,255,0.4); border:none; cursor:pointer; transition: background 240ms ease, transform 240ms ease; }
+.hero__dot:hover { background:rgba(255,255,255,0.7); }
+.hero__dot--active { background:#fff; transform:scale(1.15); box-shadow:0 0 0 2px rgba(255,255,255,0.4); }
+
+@media (max-width: 860px) {
+	.hero__dots { flex-direction:row; bottom:1.25rem; top:auto; right:50%; transform:translateX(50%); }
+	.hero__title { margin-bottom:2rem; }
+}
