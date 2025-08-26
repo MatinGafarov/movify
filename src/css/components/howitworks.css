@@ -194,7 +194,37 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .how-it-works {
+    padding: 4.5rem 0;
+  }
+  
+  .how-it-works__inner {
+    padding: 0 1.5rem;
+  }
+  
+  .how-it-works__step {
+    gap: 2.5rem;
+  }
+}
+
 @media (max-width: 1024px) { 
+  .how-it-works {
+    padding: 4rem 0;
+  }
+  
+  .how-it-works__header {
+    margin-bottom: 3.5rem;
+  }
+  
+  .how-it-works__title {
+    font-size: clamp(2rem, 4vw, 2.3rem);
+  }
+  
+  .how-it-works__subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+  }
+  
   .how-it-works__step { 
     grid-template-columns: 1fr; 
     gap: 2rem; 
@@ -207,6 +237,10 @@
   
   .how-it-works__step::after { 
     display: none; 
+  }
+  
+  .how-it-works__step-number {
+    margin: 0 auto 1.5rem;
   }
   
   .how-it-works__signup-visual, 
@@ -222,19 +256,54 @@
 
 @media (max-width: 768px) { 
   .how-it-works { 
-    padding: 3rem 0; 
+    padding: 3.5rem 0; 
+  }
+  
+  .how-it-works__inner {
+    padding: 0 1rem;
+  }
+  
+  .how-it-works__header {
+    margin-bottom: 3rem;
   }
   
   .how-it-works__title { 
-    font-size: 2rem; 
+    font-size: clamp(1.8rem, 5vw, 2rem); 
+    margin-bottom: 0.75rem;
+  }
+  
+  .how-it-works__subtitle {
+    font-size: clamp(0.95rem, 2.8vw, 1rem);
+    max-width: 500px;
+  }
+  
+  .how-it-works__steps {
+    gap: 2.5rem;
+  }
+  
+  .how-it-works__step {
+    gap: 1.5rem;
+  }
+  
+  .how-it-works__step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
   }
   
   .how-it-works__step-title { 
-    font-size: 1.5rem; 
+    font-size: clamp(1.4rem, 4vw, 1.6rem); 
+    margin-bottom: 0.75rem;
+  }
+  
+  .how-it-works__step-description {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    margin-bottom: 1.5rem;
   }
   
   .how-it-works__step-visual { 
-    padding: 1.5rem; 
+    padding: 1.25rem; 
   }
   
   .how-it-works__signup-visual, 
@@ -244,42 +313,12 @@
   }
   
   .how-it-works__step-image { 
-    max-width: 100%; 
+    max-width: 90%; 
     height: auto; 
   }
   
   .how-it-works__success {
     margin-top: 2.5rem;
-  }
-  
-  .how-it-works__success-icon {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .how-it-works__success-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-@media (max-width: 480px) { 
-  .how-it-works__inner { 
-    padding: 0 1rem; 
-  }
-  
-  .how-it-works__step-visual { 
-    padding: 1rem; 
-  }
-  
-  .how-it-works__signup-visual, 
-  .how-it-works__pricing-visual, 
-  .how-it-works__enjoy-visual { 
-    min-height: 140px; 
-  }
-  
-  .how-it-works__success {
-    margin-top: 2rem;
   }
   
   .how-it-works__success-icon {
@@ -293,6 +332,116 @@
   }
   
   .how-it-works__success-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .how-it-works {
+    padding: 3rem 0;
+  }
+  
+  .how-it-works__header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .how-it-works__steps {
+    gap: 2rem;
+  }
+  
+  .how-it-works__step {
+    gap: 1.25rem;
+  }
+  
+  .how-it-works__step-visual {
+    padding: 1rem;
+  }
+  
+  .how-it-works__signup-visual, 
+  .how-it-works__pricing-visual, 
+  .how-it-works__enjoy-visual { 
+    min-height: 140px; 
+  }
+}
+
+@media (max-width: 480px) { 
+  .how-it-works {
+    padding: 2.5rem 0;
+  }
+  
+  .how-it-works__inner { 
+    padding: 0 0.75rem; 
+  }
+  
+  .how-it-works__header {
+    margin-bottom: 2rem;
+  }
+  
+  .how-it-works__title {
+    font-size: clamp(1.6rem, 6vw, 1.8rem);
+    margin-bottom: 0.5rem;
+  }
+  
+  .how-it-works__subtitle {
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
+    max-width: 100%;
+  }
+  
+  .how-it-works__steps {
+    gap: 1.75rem;
+  }
+  
+  .how-it-works__step {
+    gap: 1rem;
+  }
+  
+  .how-it-works__step-number {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .how-it-works__step-title {
+    font-size: clamp(1.25rem, 5vw, 1.4rem);
+    margin-bottom: 0.5rem;
+  }
+  
+  .how-it-works__step-description {
+    font-size: clamp(0.85rem, 3vw, 0.9rem);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+  
+  .how-it-works__step-visual { 
+    padding: 0.75rem; 
+  }
+  
+  .how-it-works__signup-visual, 
+  .how-it-works__pricing-visual, 
+  .how-it-works__enjoy-visual { 
+    min-height: 120px; 
+  }
+  
+  .how-it-works__step-image {
+    max-width: 85%;
+  }
+  
+  .how-it-works__success {
+    margin-top: 1.5rem;
+  }
+  
+  .how-it-works__success-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .how-it-works__success-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .how-it-works__success-text {
+    font-size: 0.9rem;
   }
 }

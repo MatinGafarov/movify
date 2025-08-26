@@ -17,9 +17,26 @@
 @media (min-width:480px){ .card { width:200px; flex-basis:200px; } }
 @media (min-width:768px){ .card { width:220px; flex-basis:220px; } }
 @media (min-width:1024px){ .card { width:240px; flex-basis:240px; } }
-.card__media { position:relative; overflow:hidden; border-radius:12px; aspect-ratio:2/3; background:#111; z-index:1; }
+.card__media { position:relative; overflow:hidden; border-radius:12px; aspect-ratio:2/3; background:#111; z-index:1; transition: transform 0.3s ease; }
+.card:hover .card__media { transform: translateY(-3px); }
 .card__img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 900ms cubic-bezier(.19,1,.22,1), filter 600ms ease; }
-.card__rating { position:absolute; top:0; left:50%; transform:translate(-50%,-65px); display:flex; gap:6px; align-items:center; z-index:5; transition: transform 360ms var(--ease-out), opacity 300ms ease; opacity:0; padding:.4rem .65rem .45rem; background:rgba(11,11,15,0.55); backdrop-filter:blur(4px); border-radius:30px; box-shadow:0 4px 14px -4px rgba(0,0,0,.55); }
+.card__rating { 
+  position: absolute; 
+  top: 0; 
+  left: 50%; 
+  transform: translate(-50%,-65px); 
+  display: flex; 
+  gap: 6px; 
+  align-items: center; 
+  z-index: 5; 
+  transition: transform 360ms var(--ease-out), opacity 300ms ease; 
+  opacity: 0; 
+  padding: .4rem .65rem .45rem; 
+  background: rgba(11,11,15,0.55); 
+  backdrop-filter: blur(4px); 
+  border-radius: 8px; 
+  box-shadow: 0 4px 14px -4px rgba(0,0,0,.55); 
+}
 .card__star { width:16px; height:16px; color:#fbbf24; filter: drop-shadow(0 2px 4px rgba(0,0,0,.45)); transform:translateY(-22px) scale(.4); opacity:0; }
 .card__star--dim { color:#9ca3af; }
 .card__rating-text { font-size:.7rem; font-family:'QuicksandSemiBold'; letter-spacing:.5px; color:#fff; line-height:1; transform:translateY(-18px); opacity:0; display:inline-block; min-width:34px; text-align:center; }
@@ -63,8 +80,8 @@
 
 /* Navigation arrows (matching TV Shows but with dark colors for white background) */
 .catalog__nav { position:absolute; top:50%; left:-20px; right:-20px; display:flex; justify-content:space-between; transform:translateY(-50%); pointer-events:none; z-index:10; }
-.catalog__btn { background:rgba(11,11,15,0.12); border:1px solid rgba(11,11,15,0.25); color:#0b0b0f; width:42px; height:42px; display:grid; place-items:center; border-radius:50%; cursor:pointer; backdrop-filter:blur(4px); transition: background 180ms ease, border-color 180ms ease, transform 180ms ease; pointer-events:auto; z-index:10; }
-.catalog__btn:hover { background:rgba(11,11,15,0.2); transform:scale(1.06); }
+.catalog__btn { background:rgba(11,11,15,0.12); border:1px solid rgba(11,11,15,0.25); color:#0b0b0f; width:42px; height:42px; display:grid; place-items:center; border-radius:8px; cursor:pointer; backdrop-filter:blur(4px); transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, border-radius 180ms ease; pointer-events:auto; z-index:10; }
+.catalog__btn:hover { background:rgba(11,11,15,0.2); transform:scale(1.06) rotate(5deg); border-radius:50%; }
 .catalog__btn:disabled { opacity:.3; cursor:not-allowed; }
 .catalog__btn-icon { width:20px; height:20px; }
 
@@ -74,17 +91,159 @@
 .catalog__dot--active { background:var(--color-primary); transform:scale(1.3); }
 
 /* Responsive breakpoints with standard sizes */
-@media (max-width:768px){ 
-  .catalog__track { gap:1rem; }
-  .catalog__nav { display:flex; }
-  .catalog__header { flex-direction:column; align-items:flex-start; gap:.75rem; }
-  .catalog__view-all { font-size:.8rem; }
+@media (max-width: 1024px) {
+  .catalog {
+    padding: 4rem 0 3rem;
+  }
+  
+  .catalog__inner {
+    padding: 0 1.5rem;
+  }
+  
+  .catalog__track {
+    gap: 1rem;
+  }
 }
 
-@media (max-width:480px){ 
-  .catalog__track { overflow-x:auto; scroll-snap-type:x mandatory; gap:0.75rem; }
-  .card { scroll-snap-align:start; width:160px; flex-basis:160px; }
-  .catalog__nav { display:none; }
-  .catalog__inner { padding:0 1rem; }
-  .catalog__header { margin:0 0 1.5rem; }
+@media (max-width: 768px) { 
+  .catalog {
+    padding: 3.5rem 0 2.5rem;
+  }
+  
+  .catalog__inner {
+    padding: 0 1rem;
+  }
+  
+  .catalog__track { 
+    gap: 1rem; 
+  }
+  
+  .catalog__nav { 
+    display: flex; 
+    left: -15px;
+    right: -15px;
+  }
+  
+  .catalog__btn {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .catalog__btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .catalog__header { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 0.75rem; 
+    margin: 0 0 1.5rem;
+  }
+  
+  .catalog__heading {
+    font-size: 1.5rem;
+  }
+  
+  .catalog__view-all { 
+    font-size: 0.8rem; 
+  }
+}
+
+@media (max-width: 600px) {
+  .catalog__track { 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    gap: 0.75rem;
+    padding-bottom: 0.5rem; /* Space for scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(141, 56, 201, 0.3) transparent;
+  }
+  
+  .catalog__track::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .catalog__track::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+  }
+  
+  .catalog__track::-webkit-scrollbar-thumb {
+    background: rgba(141, 56, 201, 0.4);
+    border-radius: 2px;
+  }
+  
+  .catalog__track::-webkit-scrollbar-thumb:hover {
+    background: rgba(141, 56, 201, 0.6);
+  }
+  
+  .card { 
+    scroll-snap-align: start; 
+    width: 150px; 
+    flex-basis: 150px; 
+  }
+  
+  .catalog__nav { 
+    display: none; 
+  }
+}
+
+@media (max-width: 480px) { 
+  .catalog {
+    padding: 3rem 0 2rem;
+  }
+  
+  .catalog__inner { 
+    padding: 0 0.75rem; 
+  }
+  
+  .catalog__header { 
+    margin: 0 0 1.25rem; 
+  }
+  
+  .catalog__heading {
+    font-size: 1.3rem;
+  }
+  
+  .catalog__track {
+    gap: 0.5rem;
+  }
+  
+  .card { 
+    width: 140px; 
+    flex-basis: 140px; 
+  }
+  
+  .card__title {
+    font-size: 0.85rem;
+  }
+  
+  .card__info {
+    font-size: 0.65rem;
+  }
+  
+  .card__play {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .card__play-icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .card__rating {
+    padding: 0.3rem 0.5rem 0.35rem;
+  }
+  
+  .card__star {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .card__rating-text {
+    font-size: 0.6rem;
+    min-width: 28px;
+  }
 }
