@@ -1083,3 +1083,130 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ===============================
+// Pagination functionality
+// ===============================
+
+// Celebrities page pagination
+(function() {
+    const paginationContainer = document.querySelector('.celebrities-pagination');
+    if (!paginationContainer) return;
+    
+    const paginationBtns = paginationContainer.querySelectorAll('.celebrities-pagination__btn');
+    
+    paginationBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all buttons
+            paginationBtns.forEach(b => b.classList.remove('celebrities-pagination__btn--active'));
+            
+            // Add active class to clicked button
+            this.classList.add('celebrities-pagination__btn--active');
+            
+            // Get page number
+            const pageNumber = this.textContent.trim();
+            
+            // Show loading transition
+            if (typeof showPageTransitionLoading === 'function') {
+                showPageTransitionLoading();
+            }
+            
+            // Simulate page change with loading animation
+            setTimeout(() => {
+                // Here you would typically load the new content
+                // For now, we'll just hide the loading screen
+                const loadingScreen = document.querySelector('.loading');
+                if (loadingScreen) {
+                    loadingScreen.classList.remove('loading--active');
+                }
+                
+                // Scroll to top smoothly
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                console.log(`Switched to celebrities page ${pageNumber}`);
+            }, 1000);
+        });
+    });
+})();
+
+// Movie List page pagination
+(function() {
+    const paginationContainer = document.querySelector('.movie-pagination');
+    if (!paginationContainer) return;
+    
+    const paginationBtns = paginationContainer.querySelectorAll('.movie-pagination__btn');
+    
+    paginationBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Handle next button
+            if (this.classList.contains('movie-pagination__btn--next')) {
+                // Find current active button
+                const currentActive = paginationContainer.querySelector('.movie-pagination__btn--active');
+                const currentPageNumber = parseInt(currentActive.textContent.trim());
+                const maxPage = Math.max(...Array.from(paginationBtns)
+                    .filter(b => !b.classList.contains('movie-pagination__btn--next'))
+                    .map(b => parseInt(b.textContent.trim()) || 0));
+                
+                if (currentPageNumber < maxPage) {
+                    // Remove active from current
+                    currentActive.classList.remove('movie-pagination__btn--active');
+                    
+                    // Find and activate next page
+                    const nextBtn = Array.from(paginationBtns).find(b => 
+                        parseInt(b.textContent.trim()) === currentPageNumber + 1
+                    );
+                    if (nextBtn) {
+                        nextBtn.classList.add('movie-pagination__btn--active');
+                    }
+                }
+            } 
+            // Handle number buttons
+            else if (!this.classList.contains('movie-pagination__btn--next')) {
+                // Remove active class from all number buttons
+                paginationBtns.forEach(b => {
+                    if (!b.classList.contains('movie-pagination__btn--next')) {
+                        b.classList.remove('movie-pagination__btn--active');
+                    }
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('movie-pagination__btn--active');
+            }
+            
+            // Get page number
+            const pageNumber = this.classList.contains('movie-pagination__btn--next') 
+                ? 'next' 
+                : this.textContent.trim();
+            
+            // Show loading transition
+            if (typeof showPageTransitionLoading === 'function') {
+                showPageTransitionLoading();
+            }
+            
+            // Simulate page change with loading animation
+            setTimeout(() => {
+                // Here you would typically load the new content
+                // For now, we'll just hide the loading screen
+                const loadingScreen = document.querySelector('.loading');
+                if (loadingScreen) {
+                    loadingScreen.classList.remove('loading--active');
+                }
+                
+                // Scroll to top smoothly
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                console.log(`Switched to movie page ${pageNumber}`);
+            }, 1000);
+        });
+    });
+})();
