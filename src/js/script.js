@@ -24,20 +24,45 @@ function heroParallax(){
 window.addEventListener('scroll', heroParallax, { passive:true });
 heroParallax();
 
-// Mobile nav toggle
+// Mobile nav toggle with enhanced animations
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('mainMenu');
 const navSearchForm = document.getElementById('navSearchForm');
 const navSearchInput = document.getElementById('navSearchInput');
+
 if(navToggle && navMenu){
+	// Add staggered animation to menu links
+	const menuLinks = navMenu.querySelectorAll('.nav__link');
+	
 	navToggle.addEventListener('click', () => {
 		const expanded = navToggle.getAttribute('aria-expanded') === 'true';
 		const next = !expanded;
+		
 		navToggle.setAttribute('aria-expanded', String(next));
 		navMenu.classList.toggle('nav__menu--open', next);
 		navMenu.setAttribute('aria-hidden', String(!next));
 		document.body.classList.toggle('nav-open', next);
+		
+		// Staggered animation for menu links
+		if(next) {
+			menuLinks.forEach((link, index) => {
+				link.style.opacity = '0';
+				link.style.transform = 'translateY(20px)';
+				setTimeout(() => {
+					link.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+					link.style.opacity = '1';
+					link.style.transform = 'translateY(0)';
+				}, 100 + (index * 80));
+			});
+		} else {
+			menuLinks.forEach(link => {
+				link.style.transition = '';
+				link.style.opacity = '';
+				link.style.transform = '';
+			});
+		}
 	});
+	
 	// Close on resize up
 	window.addEventListener('resize', () => {
 		if(window.innerWidth > 960 && navToggle.getAttribute('aria-expanded') === 'true'){
@@ -45,6 +70,13 @@ if(navToggle && navMenu){
 			navMenu.classList.remove('nav__menu--open');
 			navMenu.setAttribute('aria-hidden','true');
 			document.body.classList.remove('nav-open');
+			
+			// Reset animations
+			menuLinks.forEach(link => {
+				link.style.transition = '';
+				link.style.opacity = '';
+				link.style.transform = '';
+			});
 		}
 	});
 }
