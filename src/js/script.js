@@ -197,7 +197,11 @@ const loadingMessages = {
 	celebrities: ['Loading Celebrities...', 'Getting star information...', 'Preparing profiles...'],
 	profile: ['Loading Profile...', 'Getting your data...', 'Setting up your account...'],
 	pricing: ['Loading Pricing Plans...', 'Fetching subscription options...', 'Preparing plans...'],
-	search: ['Searching...', 'Finding results...', 'Almost there...']
+	search: ['Searching...', 'Finding results...', 'Almost there...'],
+	dashboard: ['Loading Dashboard...', 'Preparing your workspace...', 'Setting up dashboard...'],
+	viewer: ['Loading Viewer Dashboard...', 'Setting up your viewing experience...', 'Preparing recommendations...'],
+	producer: ['Loading Producer Dashboard...', 'Setting up production tools...', 'Preparing project workspace...'],
+	festival: ['Loading Festival Dashboard...', 'Setting up festival management...', 'Preparing event tools...']
 };
 
 // Show loading screen
@@ -302,6 +306,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	} else if (currentPage.includes('pricing')) {
 		loadingType = 'pricing';
 		loadingDuration = 1700;
+	} else if (currentPage.includes('viewer-dashboard')) {
+		loadingType = 'viewer';
+		loadingDuration = 2200;
+	} else if (currentPage.includes('producer-dashboard')) {
+		loadingType = 'producer';
+		loadingDuration = 2200;
+	} else if (currentPage.includes('festival-dashboard')) {
+		loadingType = 'festival';
+		loadingDuration = 2200;
+	} else if (currentPage.includes('dashboard')) {
+		loadingType = 'dashboard';
+		loadingDuration = 2000;
 	}
 	
 	// Show loading screen on page load

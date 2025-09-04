@@ -1,0 +1,687 @@
+/* ================================================
+   FESTIVAL DASHBOARD STYLES
+   ================================================ */
+
+/* Dashboard Hero Section */
+.dashboard-hero {
+  position: relative;
+  padding: 8rem 0 4rem;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+  color: white;
+  overflow: hidden;
+}
+
+.dashboard-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><circle cx="30" cy="30" r="2"/></g></svg>');
+  pointer-events: none;
+}
+
+.dashboard-hero__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-hero__content {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.dashboard-hero__title {
+  font-family: 'QuicksandBold';
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #fff, #c084fc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard-hero__subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.dashboard-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Stat Cards */
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(192, 132, 252, 0.5);
+}
+
+.stat-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card__number {
+  font-family: 'QuicksandBold';
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #c084fc;
+}
+
+.stat-card__label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Section Styling */
+.create-festival,
+.my-festivals,
+.applications-review,
+.jury-scores {
+  padding: 4rem 0;
+  background: #f8fafc;
+}
+
+.create-festival:nth-child(even),
+.my-festivals:nth-child(even),
+.applications-review:nth-child(even),
+.jury-scores:nth-child(even) {
+  background: white;
+}
+
+.create-festival__inner,
+.my-festivals__inner,
+.applications-review__inner,
+.jury-scores__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header__title {
+  font-family: 'QuicksandBold';
+  font-size: 2.2rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.section-header__subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.section-header__filters {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  border-radius: 8px;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn--active,
+.filter-btn:hover {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+  color: white;
+}
+
+.filter-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Festival Form */
+.festival-form {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.festival-form__group {
+  margin-bottom: 2rem;
+}
+
+.festival-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.festival-form__label {
+  display: block;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.9rem;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.festival-form__input,
+.festival-form__select,
+.festival-form__textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: 'QuicksandRegular';
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.festival-form__input:focus,
+.festival-form__select:focus,
+.festival-form__textarea:focus {
+  outline: none;
+  border-color: #8b5cf6;
+}
+
+.festival-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.festival-form__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+/* Festivals Grid */
+.festivals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.festival-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.festival-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+}
+
+.festival-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.festival-card__title {
+  font-family: 'QuicksandBold';
+  font-size: 1.3rem;
+  color: #1e293b;
+  flex: 1;
+}
+
+.festival-card__info {
+  margin-bottom: 2rem;
+}
+
+.festival-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.festival-info__label {
+  color: #64748b;
+  font-family: 'QuicksandSemiBold';
+}
+
+.festival-info__value {
+  color: #1e293b;
+  font-family: 'QuicksandSemiBold';
+}
+
+.festival-card__actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.status-badge--active {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge--completed {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-badge--pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge--under-review {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge--accepted {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-badge--rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Applications Table */
+.applications-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.applications-table__header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr;
+  background: #f1f5f9;
+  padding: 1rem 1.5rem;
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.applications-table__row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr;
+  padding: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+  align-items: center;
+}
+
+.applications-table__row:hover {
+  background: #f8fafc;
+}
+
+.applications-table__cell {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Film Info */
+.film-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.film-info__poster {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.film-info__title {
+  font-family: 'QuicksandBold';
+  font-size: 1rem;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.film-info__genre {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.action-btn:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.action-btn--view:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.action-btn--accept:hover {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.action-btn--reject:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.action-btn--award:hover {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+/* Jury Scores */
+.scores-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.film-scores {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.film-scores__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.film-scores__title {
+  font-family: 'QuicksandBold';
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.film-scores__average {
+  background: #8b5cf6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  font-family: 'QuicksandBold';
+  font-size: 1.1rem;
+}
+
+/* Jury Table */
+.jury-table {
+  margin-bottom: 2rem;
+}
+
+.jury-table__header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.jury-table__row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+}
+
+.jury-table__cell {
+  font-size: 0.9rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.jury-table__cell:first-child {
+  text-align: left;
+  font-family: 'QuicksandSemiBold';
+  color: #1e293b;
+}
+
+.jury-table__cell:last-child {
+  font-family: 'QuicksandBold';
+  color: #8b5cf6;
+  font-size: 1rem;
+}
+
+/* Jury Comments */
+.jury-comments__title {
+  font-family: 'QuicksandBold';
+  font-size: 1.2rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.comment {
+  background: #f8fafc;
+  border-left: 4px solid #8b5cf6;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.comment__author {
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.comment__text {
+  color: #64748b;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--primary {
+  background: #8b5cf6;
+  color: white;
+}
+
+.btn--primary:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+}
+
+.btn--secondary {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.btn--secondary:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.btn--sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-hero {
+    padding: 6rem 0 3rem;
+  }
+  
+  .dashboard-hero__title {
+    font-size: 2.2rem;
+  }
+  
+  .dashboard-hero__stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .festival-form {
+    padding: 2rem;
+  }
+  
+  .festival-form__row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .festival-form__actions {
+    flex-direction: column;
+  }
+  
+  .festivals-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .festival-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .festival-card__actions {
+    flex-direction: column;
+  }
+  
+  .applications-table__header,
+  .applications-table__row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .applications-table__cell {
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+  
+  .jury-table__header,
+  .jury-table__row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .film-scores__header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-hero__inner,
+  .create-festival__inner,
+  .my-festivals__inner,
+  .applications-review__inner,
+  .jury-scores__inner {
+    padding: 0 1rem;
+  }
+  
+  .festival-form {
+    padding: 1.5rem;
+  }
+  
+  .festival-card {
+    padding: 1.5rem;
+  }
+  
+  .film-scores {
+    padding: 1.5rem;
+  }
+  
+  .section-header__filters {
+    flex-direction: column;
+    align-items: center;
+  }
+}

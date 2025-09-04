@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producer Dashboard - Movify</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/producer-dashboard.css" />
+  <link rel="preload" href="src/assets/fonts/QuicksandRegular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandSemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandBold.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading__container">
+      <img src="src/assets/svg/logo-white.svg" alt="Movify" class="loading__logo">
+      <div class="loading__spinner"></div>
+      <div class="loading__text" id="loadingText">Loading Producer Dashboard...</div>
+      <div class="loading__progress">
+        <div class="loading__progress-bar" id="loadingProgressBar"></div>
+      </div>
+      <div class="loading__dots">
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="nav" id="siteNav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Movify home">
+        <img src="src/assets/svg/logo-white.svg" alt="Movify" class="nav__logo-img" />
+      </a>
+      <div class="nav__menu" id="mainMenu" role="navigation" aria-label="Primary" aria-hidden="true">
+        <ul class="nav__list" aria-label="Main navigation">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html">Home</a>
+          </li>
+          <li class="nav__item nav__item--has-children">
+            <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Movies <span class="nav__caret" aria-hidden="true"></span></button>
+            <ul class="nav__sub" aria-label="Movies submenu">
+              <li class="nav__sub-item"><a class="nav__sub-link" href="movie-list.html">Movie List</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Movie Detail</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--has-children">
+            <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Pages <span class="nav__caret" aria-hidden="true"></span></button>
+            <ul class="nav__sub" aria-label="Pages submenu">
+              <li class="nav__sub-item"><a class="nav__sub-link" href="viewer-dashboard.html">Viewer Dashboard</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="producer-dashboard.html">Producer Dashboard</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="festival-dashboard.html">Festival Dashboard</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="celebrities.html">Celebrities</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="coming-soon.html">Coming Soon</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Pricing</a></li>
+            </ul>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="profile.html">Profile</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search" id="globalSearchBtn">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="nav__icon-btn nav__icon-btn--notify" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><path d="M12 2a6 6 0 0 0-6 6v3.586l-.707 1.707A1 1 0 0 0 6.21 15h11.58a1 1 0 0 0 .917-1.707L18 11.586V8a6 6 0 0 0-6-6Z" fill="currentColor"/><path d="M10 19a2 2 0 1 0 4 0h-4Z" fill="currentColor"/></svg>
+          <span class="nav__badge" aria-label="2 notifications">2</span>
+        </button>
+        <a href="#login" class="nav__login-btn">
+          <svg viewBox="0 0 24 24" class="nav__login-icon" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-9 9a9 9 0 0 1 18 0Z" fill="currentColor"/></svg>
+          <span>Login</span>
+        </a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainMenu">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+      <div class="dashboard-hero__inner">
+        <div class="dashboard-hero__content">
+          <h1 class="dashboard-hero__title">Producer Dashboard</h1>
+          <p class="dashboard-hero__subtitle">Manage your films, track statistics and apply to festivals</p>
+        </div>
+        <div class="dashboard-hero__stats">
+          <div class="stat-card">
+            <div class="stat-card__icon">🎬</div>
+            <div class="stat-card__number">12</div>
+            <div class="stat-card__label">Uploaded Films</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">👀</div>
+            <div class="stat-card__number">15.2K</div>
+            <div class="stat-card__label">Total Views</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">⭐</div>
+            <div class="stat-card__number">4.8</div>
+            <div class="stat-card__label">Average Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upload Film Section -->
+    <section class="upload-section">
+      <div class="upload-section__inner">
+        <div class="section-header">
+          <h2 class="section-header__title">Upload New Film</h2>
+          <p class="section-header__subtitle">Will be published after admin approval</p>
+        </div>
+
+        <div class="upload-form">
+          <div class="upload-form__group">
+            <label class="upload-form__label">Film File</label>
+            <div class="upload-area">
+              <div class="upload-area__icon">📁</div>
+              <div class="upload-area__text">
+                <span class="upload-area__primary">Drag your film file</span>
+                <span class="upload-area__secondary">or click to select</span>
+              </div>
+              <input type="file" class="upload-area__input" accept="video/*" />
+            </div>
+          </div>
+
+          <div class="upload-form__row">
+            <div class="upload-form__group">
+              <label class="upload-form__label">Film Name</label>
+              <input type="text" class="upload-form__input" placeholder="Enter film title" />
+            </div>
+            <div class="upload-form__group">
+              <label class="upload-form__label">Genre</label>
+              <select class="upload-form__select">
+                <option>Action</option>
+                <option>Drama</option>
+                <option>Comedy</option>
+                <option>Horror</option>
+                <option>Sci-Fi</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="upload-form__group">
+            <label class="upload-form__label">Film Description</label>
+            <textarea class="upload-form__textarea" rows="4" placeholder="Detailed description about the film"></textarea>
+          </div>
+
+          <div class="upload-form__row">
+            <div class="upload-form__group">
+              <label class="upload-form__label">Year</label>
+              <input type="number" class="upload-form__input" placeholder="2024" />
+            </div>
+            <div class="upload-form__group">
+              <label class="upload-form__label">Duration (minutes)</label>
+              <input type="number" class="upload-form__input" placeholder="120" />
+            </div>
+          </div>
+
+          <div class="upload-form__actions">
+            <button class="btn btn--primary">Upload and Send for Approval</button>
+            <button class="btn btn--secondary">Save as Draft</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Films Section -->
+    <section class="my-films">
+      <div class="my-films__inner">
+        <div class="section-header">
+          <h2 class="section-header__title">My Films</h2>
+          <div class="section-header__filters">
+            <button class="filter-btn filter-btn--active">All</button>
+            <button class="filter-btn">Published</button>
+            <button class="filter-btn">Pending Approval</button>
+            <button class="filter-btn">Draft</button>
+          </div>
+        </div>
+
+        <div class="films-table">
+          <div class="films-table__header">
+            <div class="films-table__cell">Film</div>
+            <div class="films-table__cell">Status</div>
+            <div class="films-table__cell">Views</div>
+            <div class="films-table__cell">Rating</div>
+            <div class="films-table__cell">Uploaded</div>
+            <div class="films-table__cell">Actions</div>
+          </div>
+
+          <div class="films-table__row">
+            <div class="films-table__cell">
+              <div class="film-info">
+                <img src="src/assets/images/poster-1.jpg" alt="Film" class="film-info__poster" />
+                <div class="film-info__details">
+                  <h4 class="film-info__title">Inception</h4>
+                  <p class="film-info__genre">Sci-Fi, Thriller</p>
+                </div>
+              </div>
+            </div>
+            <div class="films-table__cell">
+              <span class="status-badge status-badge--published">Published</span>
+            </div>
+            <div class="films-table__cell">3,245</div>
+            <div class="films-table__cell">8.5/10</div>
+            <div class="films-table__cell">March 15, 2024</div>
+            <div class="films-table__cell">
+              <div class="action-buttons">
+                <button class="action-btn action-btn--edit">✏️</button>
+                <button class="action-btn action-btn--stats">📊</button>
+                <button class="action-btn action-btn--festival">🎭</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="films-table__row">
+            <div class="films-table__cell">
+              <div class="film-info">
+                <img src="src/assets/images/poster-2.jpg" alt="Film" class="film-info__poster" />
+                <div class="film-info__details">
+                  <h4 class="film-info__title">The Dark Knight</h4>
+                  <p class="film-info__genre">Action, Crime</p>
+                </div>
+              </div>
+            </div>
+            <div class="films-table__cell">
+              <span class="status-badge status-badge--pending">Pending Approval</span>
+            </div>
+            <div class="films-table__cell">-</div>
+            <div class="films-table__cell">-</div>
+            <div class="films-table__cell">March 20, 2024</div>
+            <div class="films-table__cell">
+              <div class="action-buttons">
+                <button class="action-btn action-btn--edit">✏️</button>
+                <button class="action-btn action-btn--delete">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Festival Applications Section -->
+    <section class="festival-applications">
+      <div class="festival-applications__inner">
+        <div class="section-header">
+          <h2 class="section-header__title">Festival Applications</h2>
+          <p class="section-header__subtitle">Submit your films to festivals (with Stripe payment)</p>
+        </div>
+
+        <div class="festival-grid">
+          <div class="festival-card">
+            <div class="festival-card__header">
+              <h3 class="festival-card__title">Cannes Film Festival</h3>
+              <div class="festival-card__price">€150</div>
+            </div>
+            <div class="festival-card__content">
+              <div class="festival-card__info">
+                <div class="festival-info">
+                  <span class="festival-info__label">Application Date:</span>
+                  <span class="festival-info__value">Until May 1, 2024</span>
+                </div>
+                <div class="festival-info">
+                  <span class="festival-info__label">Festival Date:</span>
+                  <span class="festival-info__value">May 16-27, 2024</span>
+                </div>
+                <div class="festival-info">
+                  <span class="festival-info__label">Category:</span>
+                  <span class="festival-info__value">Feature Film</span>
+                </div>
+              </div>
+              <div class="festival-card__films">
+                <label class="festival-card__label">Select Film:</label>
+                <select class="festival-card__select">
+                  <option>Inception</option>
+                  <option>The Dark Knight</option>
+                </select>
+              </div>
+              <button class="btn btn--primary btn--full">Apply with Stripe</button>
+            </div>
+          </div>
+
+          <div class="festival-card">
+            <div class="festival-card__header">
+              <h3 class="festival-card__title">Venice Film Festival</h3>
+              <div class="festival-card__price">€120</div>
+            </div>
+            <div class="festival-card__content">
+              <div class="festival-card__info">
+                <div class="festival-info">
+                  <span class="festival-info__label">Application Date:</span>
+                  <span class="festival-info__value">Until June 15, 2024</span>
+                </div>
+                <div class="festival-info">
+                  <span class="festival-info__label">Festival Date:</span>
+                  <span class="festival-info__value">August 28 - September 7, 2024</span>
+                </div>
+                <div class="festival-info">
+                  <span class="festival-info__label">Category:</span>
+                  <span class="festival-info__value">International</span>
+                </div>
+              </div>
+              <div class="festival-card__films">
+                <label class="festival-card__label">Select Film:</label>
+                <select class="festival-card__select">
+                  <option>Inception</option>
+                  <option>The Dark Knight</option>
+                </select>
+              </div>
+              <button class="btn btn--primary btn--full">Apply with Stripe</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="application-history">
+          <h3 class="application-history__title">Application History</h3>
+          <div class="application-table">
+            <div class="application-table__header">
+              <div class="application-table__cell">Festival</div>
+              <div class="application-table__cell">Film</div>
+              <div class="application-table__cell">Date</div>
+              <div class="application-table__cell">Status</div>
+              <div class="application-table__cell">Payment</div>
+            </div>
+            <div class="application-table__row">
+              <div class="application-table__cell">Cannes Film Festival</div>
+              <div class="application-table__cell">Inception</div>
+              <div class="application-table__cell">March 10, 2024</div>
+              <div class="application-table__cell">
+                <span class="status-badge status-badge--pending">Under Review</span>
+              </div>
+              <div class="application-table__cell">
+                <span class="status-badge status-badge--paid">Paid</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <img src="src/assets/svg/logo-white.svg" alt="Movify" width="120" height="40" />
+          <p class="footer__description">
+            Professional platform for film producers. Manage your films and reach festivals.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__column">
+            <h4 class="footer__title">Quick Links</h4>
+            <ul class="footer__list">
+              <li><a href="index.html" class="footer__link">Home</a></li>
+              <li><a href="movie-list.html" class="footer__link">Movies</a></li>
+              <li><a href="pricing-plan.html" class="footer__link">Membership</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4 class="footer__title">Dashboards</h4>
+            <ul class="footer__list">
+              <li><a href="viewer-dashboard.html" class="footer__link">Viewer</a></li>
+              <li><a href="producer-dashboard.html" class="footer__link">Producer</a></li>
+              <li><a href="festival-dashboard.html" class="footer__link">Festival</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2024 Movify. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/js/script.js"></script>
+</body>
+</html>

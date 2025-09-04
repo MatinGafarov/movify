@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viewer Dashboard - Movify</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/viewer-dashboard.css" />
+  <link rel="preload" href="src/assets/fonts/QuicksandRegular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandSemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="src/assets/fonts/QuicksandBold.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loadingScreen">
+    <div class="loading__container">
+      <img src="src/assets/svg/logo-white.svg" alt="Movify" class="loading__logo">
+      <div class="loading__spinner"></div>
+      <div class="loading__text" id="loadingText">Loading Dashboard...</div>
+      <div class="loading__progress">
+        <div class="loading__progress-bar" id="loadingProgressBar"></div>
+      </div>
+      <div class="loading__dots">
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+        <div class="loading__dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="nav" id="siteNav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Movify home">
+        <img src="src/assets/svg/logo-white.svg" alt="Movify" class="nav__logo-img" />
+      </a>
+      <div class="nav__menu" id="mainMenu" role="navigation" aria-label="Primary" aria-hidden="true">
+        <ul class="nav__list" aria-label="Main navigation">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html">Home</a>
+          </li>
+          <li class="nav__item nav__item--has-children">
+            <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Movies <span class="nav__caret" aria-hidden="true"></span></button>
+            <ul class="nav__sub" aria-label="Movies submenu">
+              <li class="nav__sub-item"><a class="nav__sub-link" href="movie-list.html">Movie List</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="movie-detail.html">Movie Detail</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--has-children">
+            <button class="nav__link nav__link--toggle" aria-haspopup="true" aria-expanded="false">Pages <span class="nav__caret" aria-hidden="true"></span></button>
+            <ul class="nav__sub" aria-label="Pages submenu">
+              <li class="nav__sub-item"><a class="nav__sub-link" href="viewer-dashboard.html">Viewer Dashboard</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="producer-dashboard.html">Producer Dashboard</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="festival-dashboard.html">Festival Dashboard</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="celebrities.html">Celebrities</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="coming-soon.html">Coming Soon</a></li>
+              <li class="nav__sub-item"><a class="nav__sub-link" href="pricing-plan.html">Pricing</a></li>
+            </ul>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="profile.html">Profile</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav__actions">
+        <button class="nav__icon-btn" aria-label="Search" id="globalSearchBtn">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="nav__icon-btn nav__icon-btn--notify" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" class="nav__icon" aria-hidden="true"><path d="M12 2a6 6 0 0 0-6 6v3.586l-.707 1.707A1 1 0 0 0 6.21 15h11.58a1 1 0 0 0 .917-1.707L18 11.586V8a6 6 0 0 0-6-6Z" fill="currentColor"/><path d="M10 19a2 2 0 1 0 4 0h-4Z" fill="currentColor"/></svg>
+          <span class="nav__badge" aria-label="2 notifications">2</span>
+        </button>
+        <a href="#login" class="nav__login-btn">
+          <svg viewBox="0 0 24 24" class="nav__login-icon" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm-9 9a9 9 0 0 1 18 0Z" fill="currentColor"/></svg>
+          <span>Login</span>
+        </a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainMenu">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+      <div class="dashboard-hero__inner">
+        <div class="dashboard-hero__content">
+          <h1 class="dashboard-hero__title">Viewer Dashboard</h1>
+          <p class="dashboard-hero__subtitle">Track your movie watching history and view your earned points</p>
+        </div>
+        <div class="dashboard-hero__stats">
+          <div class="stat-card">
+            <div class="stat-card__icon">🎬</div>
+            <div class="stat-card__number">24</div>
+            <div class="stat-card__label">Watched Movies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">⭐</div>
+            <div class="stat-card__number">1,250</div>
+            <div class="stat-card__label">Total Points</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">🏆</div>
+            <div class="stat-card__number">Gold</div>
+            <div class="stat-card__label">Membership</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Watched Movies Section -->
+    <section class="watched-movies">
+      <div class="watched-movies__inner">
+        <div class="section-header">
+          <h2 class="section-header__title">My Watched Movies</h2>
+          <div class="section-header__filters">
+            <button class="filter-btn filter-btn--active">All</button>
+            <button class="filter-btn">This Month</button>
+            <button class="filter-btn">This Week</button>
+          </div>
+        </div>
+
+        <div class="movie-grid">
+          <div class="movie-card">
+            <div class="movie-card__poster">
+              <img src="src/assets/images/poster-1.jpg" alt="Film Posteri" />
+              <div class="movie-card__rating">8.5</div>
+            </div>
+            <div class="movie-card__content">
+              <h3 class="movie-card__title">Inception</h3>
+              <p class="movie-card__genre">Sci-Fi, Thriller</p>
+              <div class="movie-card__meta">
+                <span class="movie-card__date">March 15, 2024</span>
+                <span class="movie-card__points">+120 Points</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="movie-card__poster">
+              <img src="src/assets/images/poster-2.jpg" alt="Movie Poster" />
+              <div class="movie-card__rating">9.2</div>
+            </div>
+            <div class="movie-card__content">
+              <h3 class="movie-card__title">The Dark Knight</h3>
+              <p class="movie-card__genre">Action, Crime</p>
+              <div class="movie-card__meta">
+                <span class="movie-card__date">March 12, 2024</span>
+                <span class="movie-card__points">+150 Points</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="movie-card__poster">
+              <img src="src/assets/images/poster-3.jpg" alt="Movie Poster" />
+              <div class="movie-card__rating">8.8</div>
+            </div>
+            <div class="movie-card__content">
+              <h3 class="movie-card__title">Interstellar</h3>
+              <p class="movie-card__genre">Sci-Fi, Drama</p>
+              <div class="movie-card__meta">
+                <span class="movie-card__date">March 10, 2024</span>
+                <span class="movie-card__points">+130 Points</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movie-card">
+            <div class="movie-card__poster">
+              <img src="src/assets/images/poster-4.jpg" alt="Movie Poster" />
+              <div class="movie-card__rating">8.0</div>
+            </div>
+            <div class="movie-card__content">
+              <h3 class="movie-card__title">Pulp Fiction</h3>
+              <p class="movie-card__genre">Crime, Drama</p>
+              <div class="movie-card__meta">
+                <span class="movie-card__date">March 8, 2024</span>
+                <span class="movie-card__points">+100 Points</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Points History Section -->
+    <section class="points-history">
+      <div class="points-history__inner">
+        <div class="section-header">
+          <h2 class="section-header__title">Points History</h2>
+          <div class="points-summary">
+            <div class="points-summary__item">
+              <span class="points-summary__label">This Month:</span>
+              <span class="points-summary__value">+450 Points</span>
+            </div>
+            <div class="points-summary__item">
+              <span class="points-summary__label">Total:</span>
+              <span class="points-summary__value">1,250 Points</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="points-table">
+          <div class="points-table__header">
+            <div class="points-table__cell">Date</div>
+            <div class="points-table__cell">Activity</div>
+            <div class="points-table__cell">Movie</div>
+            <div class="points-table__cell">Points</div>
+          </div>
+          <div class="points-table__row">
+            <div class="points-table__cell">March 15, 2024</div>
+            <div class="points-table__cell">Movie Watched</div>
+            <div class="points-table__cell">Inception</div>
+            <div class="points-table__cell points-table__cell--positive">+120</div>
+          </div>
+          <div class="points-table__row">
+            <div class="points-table__cell">March 12, 2024</div>
+            <div class="points-table__cell">Movie Watched</div>
+            <div class="points-table__cell">The Dark Knight</div>
+            <div class="points-table__cell points-table__cell--positive">+150</div>
+          </div>
+          <div class="points-table__row">
+            <div class="points-table__cell">March 10, 2024</div>
+            <div class="points-table__cell">Movie Watched</div>
+            <div class="points-table__cell">Interstellar</div>
+            <div class="points-table__cell points-table__cell--positive">+130</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Membership Section -->
+    <section class="membership">
+      <div class="membership__inner">
+        <div class="section-header">
+          <h2 class="section-header__title">Membership Information</h2>
+        </div>
+
+        <div class="membership-card">
+          <div class="membership-card__header">
+            <div class="membership-card__badge">Gold Member</div>
+            <div class="membership-card__icon">👑</div>
+          </div>
+          <div class="membership-card__content">
+            <h3 class="membership-card__title">Premium Membership</h3>
+            <p class="membership-card__description">
+              Unlimited movie streaming, exclusive content and access to festival events
+            </p>
+            <div class="membership-card__details">
+              <div class="membership-detail">
+                <span class="membership-detail__label">Start Date:</span>
+                <span class="membership-detail__value">January 1, 2024</span>
+              </div>
+              <div class="membership-detail">
+                <span class="membership-detail__label">End Date:</span>
+                <span class="membership-detail__value">December 31, 2024</span>
+              </div>
+              <div class="membership-detail">
+                <span class="membership-detail__label">Status:</span>
+                <span class="membership-detail__value membership-detail__value--active">Active</span>
+              </div>
+            </div>
+            <div class="membership-card__actions">
+              <button class="btn btn--primary">Renew</button>
+              <button class="btn btn--secondary">Upgrade</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <img src="src/assets/svg/logo-white.svg" alt="Movify" width="120" height="40" />
+          <p class="footer__description">
+            The meeting point for movie lovers. Discover the best movies and share your experiences.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__column">
+            <h4 class="footer__title">Quick Links</h4>
+            <ul class="footer__list">
+              <li><a href="index.html" class="footer__link">Home</a></li>
+              <li><a href="movie-list.html" class="footer__link">Movies</a></li>
+              <li><a href="pricing-plan.html" class="footer__link">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="footer__column">
+            <h4 class="footer__title">Dashboards</h4>
+            <ul class="footer__list">
+              <li><a href="viewer-dashboard.html" class="footer__link">Viewer</a></li>
+              <li><a href="producer-dashboard.html" class="footer__link">Producer</a></li>
+              <li><a href="festival-dashboard.html" class="footer__link">Festival</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2024 Movify. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/js/script.js"></script>
+</body>
+</html>
