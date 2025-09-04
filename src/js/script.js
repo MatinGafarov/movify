@@ -1258,3 +1258,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 })();
+
+// Filmography tab functionality
+(function() {
+    const filmographyTabs = document.querySelectorAll('.filmography-tab');
+    const filmographyLists = document.querySelectorAll('.filmography-list');
+    
+    if (filmographyTabs.length === 0 || filmographyLists.length === 0) return;
+    
+    filmographyTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs
+            filmographyTabs.forEach(t => t.classList.remove('filmography-tab--active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('filmography-tab--active');
+            
+            // Hide all filmography lists
+            filmographyLists.forEach(list => {
+                list.style.display = 'none';
+            });
+            
+            // Show the target filmography list
+            const targetList = document.getElementById(`filmography-${targetTab}`);
+            if (targetList) {
+                targetList.style.display = 'block';
+            }
+        });
+    });
+})();

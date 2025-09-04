@@ -9,6 +9,28 @@
   <link rel="preload" href="src/assets/fonts/QuicksandRegular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="src/assets/fonts/QuicksandSemiBold.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="src/assets/fonts/QuicksandBold.ttf" as="font" type="font/ttf" crossorigin>
+  <style>
+    /* Mobile-first responsive fixes */
+    body {
+      height: auto !important;
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+      position: relative;
+    }
+    
+    /* Ensure no navigation interference */
+    body.nav-open {
+      overflow-y: visible !important;
+    }
+    
+    main {
+      display: block;
+      width: 100%;
+      overflow: visible;
+      position: relative;
+    }
+  </style>
 </head>
 <body>
   <!-- Loading Screen -->
@@ -354,36 +376,197 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__content">
+        <!-- Brand Column -->
         <div class="footer__brand">
-          <img src="src/assets/svg/logo-white.svg" alt="Movify" width="120" height="40" />
+          <img src="src/assets/svg/logo-white.svg" alt="Movify" class="footer__logo" />
           <p class="footer__description">
-            Professional platform for film producers. Manage your films and reach festivals.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam vitae suscipit convallis, enim lacus vehicula libero, et cursus ipsum tortor non mauris. Phasellus tempor magna sit amet dignissim vulputate.
           </p>
         </div>
-        <div class="footer__links">
-          <div class="footer__column">
-            <h4 class="footer__title">Quick Links</h4>
-            <ul class="footer__list">
-              <li><a href="index.html" class="footer__link">Home</a></li>
-              <li><a href="movie-list.html" class="footer__link">Movies</a></li>
-              <li><a href="pricing-plan.html" class="footer__link">Membership</a></li>
-            </ul>
-          </div>
-          <div class="footer__column">
-            <h4 class="footer__title">Dashboards</h4>
-            <ul class="footer__list">
-              <li><a href="viewer-dashboard.html" class="footer__link">Viewer</a></li>
-              <li><a href="producer-dashboard.html" class="footer__link">Producer</a></li>
-              <li><a href="festival-dashboard.html" class="footer__link">Festival</a></li>
-            </ul>
+
+        <!-- Useful Links Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Useful Links</h3>
+          <ul class="footer__list">
+            <li><a href="#" class="footer__link">About Movify</a></li>
+            <li><a href="#" class="footer__link">Blog</a></li>
+            <li><a href="#" class="footer__link">Forum</a></li>
+            <li><a href="#" class="footer__link">My Account</a></li>
+            <li><a href="#" class="footer__link">Watch List</a></li>
+          </ul>
+        </div>
+
+        <!-- Latest News Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Latest News</h3>
+          <div class="footer__list">
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 1</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 2</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
+            <div class="footer__blog-item">
+              <a href="#" class="footer__blog-title">Blog Post 3</a>
+              <p class="footer__date">January 15, 2018</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="footer__bottom">
-        <p class="footer__copyright">© 2024 Movify. All rights reserved.</p>
+
+        <!-- Follow Us Column -->
+        <div class="footer__column">
+          <h3 class="footer__title">Follow Us</h3>
+          <p class="footer__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut cursus nunc. Aliquam accumsan, quam.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Twitter">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Google Plus">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.335 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.127-4.822 4.731-4.822 1.498 0 2.498.637 3.068 1.186l2.081-2.003c-1.332-1.248-3.059-2.001-5.149-2.001-4.253 0-7.7 3.451-7.7 7.64s3.447 7.64 7.7 7.64c4.441 0 7.387-3.104 7.387-7.478 0-.501-.054-.885-.12-1.266H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.182v2.184h2.183v-2.184H24v-2.181z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.448c0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297zm7.74 0c-1.297 0-2.448-.49-3.323-1.297-.875-.875-1.297-2.026-1.297-3.323 0-1.297.49-2.449 1.297-3.323.875-.875 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.875.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.449-1.297 3.323-.875.875-2.026 1.297-3.323 1.297z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+    <div class="video-modal__dialog">
+      <button class="video-modal__close" id="videoModalClose" aria-label="Close video">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <iframe class="video-modal__iframe" id="videoFrame" title="YouTube video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Authentication Modals -->
+  <!-- Sign In Modal -->
+  <div class="modal" id="signInModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN IN</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signInForm">
+        <div class="modal__field">
+          <label for="signInEmail" class="modal__label">Username or Email *</label>
+          <input type="text" id="signInEmail" class="modal__input" placeholder="Your Username or Email *" required>
+        </div>
+        <div class="modal__field">
+          <label for="signInPassword" class="modal__label">Password *</label>
+          <input type="password" id="signInPassword" class="modal__input" placeholder="Your Password *" required>
+        </div>
+        <div class="modal__checkbox">
+          <input type="checkbox" id="keepSignedIn" class="modal__checkbox-input">
+          <label for="keepSignedIn" class="modal__checkbox-label">Keep me signed in</label>
+        </div>
+        <button type="submit" class="modal__submit">SIGN IN</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signUpModal">Not a member? Sign up</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div class="modal" id="signUpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">SIGN UP</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="signUpForm">
+        <div class="modal__field">
+          <label for="signUpUsername" class="modal__label">Username</label>
+          <input type="text" id="signUpUsername" class="modal__input" placeholder="Username" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpEmail" class="modal__label">Email</label>
+          <input type="email" id="signUpEmail" class="modal__input" placeholder="Email" required>
+        </div>
+        <div class="modal__field">
+          <label for="signUpPassword" class="modal__label">Password</label>
+          <input type="password" id="signUpPassword" class="modal__input" placeholder="Password" required>
+        </div>
+        <button type="submit" class="modal__submit">REGISTER</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Already have an account? Sign in</a>
+          <a href="#" class="modal__link" data-modal="forgotPasswordModal">Forgot Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal" id="forgotPasswordModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">FORGOTTEN PASSWORD</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="forgotPasswordForm">
+        <div class="modal__field">
+          <label for="forgotEmail" class="modal__label">Email Address *</label>
+          <input type="email" id="forgotEmail" class="modal__input" placeholder="Email Address *" required>
+        </div>
+        <button type="submit" class="modal__submit">GET NEW PASSWORD</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" data-modal="signInModal">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- OTP Verification Modal -->
+  <div class="modal" id="otpModal">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">VERIFY YOUR EMAIL</h2>
+        <button class="modal__close" aria-label="Close modal">×</button>
+      </div>
+      <form class="modal__form" id="otpForm">
+        <div class="modal__message">
+          <p>We've sent a verification code to your email address. Please enter the 6-digit code below to complete your registration.</p>
+        </div>
+        <div class="modal__field">
+          <label for="otpCode" class="modal__label">Verification Code *</label>
+          <div class="otp-input-container">
+            <input type="text" maxlength="1" class="otp-input" data-index="0" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="1" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="2" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="3" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="4" required>
+            <input type="text" maxlength="1" class="otp-input" data-index="5" required>
+          </div>
+        </div>
+        <button type="submit" class="modal__submit">VERIFY EMAIL</button>
+        <div class="modal__links">
+          <a href="#" class="modal__link" id="resendOtp">Didn't receive code? Resend</a>
+          <a href="#" class="modal__link" data-modal="signUpModal">Back to Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="src/js/script.js"></script>
 </body>

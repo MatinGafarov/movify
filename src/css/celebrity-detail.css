@@ -1,0 +1,1314 @@
+/* Celebrity Detail Styles */
+
+/* Celebrity Hero Section */
+.celebrity-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  overflow: hidden;
+  padding: 8rem 0 4rem;
+}
+
+.celebrity-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.celebrity-hero__content {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.celebrity-hero__poster {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  transform: perspective(1000px) rotateY(-3deg);
+  transition: all 0.4s ease;
+}
+
+.celebrity-hero__poster:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.02);
+}
+
+.celebrity-hero__poster-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+.celebrity-hero__video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+}
+
+.celebrity-hero__play-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.celebrity-hero__play-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.celebrity-hero__play-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.celebrity-hero__video-text {
+  font-size: 0.9rem;
+  font-family: 'QuicksandMedium';
+}
+
+.celebrity-hero__video-duration {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-left: auto;
+}
+
+.celebrity-hero__info {
+  color: white;
+  padding-top: 1rem;
+}
+
+.celebrity-hero__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.celebrity-hero__title {
+  font-size: 4rem;
+  font-family: 'QuicksandBold';
+  line-height: 1.1;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  margin: 0;
+}
+
+.celebrity-hero__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.25rem;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.celebrity-hero__rating-icon {
+  font-size: 1.2rem;
+}
+
+.celebrity-hero__rating-score {
+  font-size: 1.1rem;
+  font-family: 'QuicksandBold';
+}
+
+.celebrity-hero__rating-votes {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.celebrity-hero__meta {
+  margin-bottom: 2rem;
+}
+
+.celebrity-hero__profession {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-family: 'QuicksandSemiBold';
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.celebrity-hero__details {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.celebrity-hero__detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.celebrity-hero__detail-label {
+  font-family: 'QuicksandSemiBold';
+  opacity: 0.8;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.celebrity-hero__detail-value {
+  font-family: 'QuicksandMedium';
+  line-height: 1.5;
+}
+
+.celebrity-hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-family: 'QuicksandSemiBold';
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn--primary:hover {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn--outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn__icon {
+  width: 18px;
+  height: 18px;
+}
+
+.celebrity-hero__known-for {
+  margin-top: 2rem;
+}
+
+.celebrity-hero__known-title {
+  font-size: 1.5rem;
+  font-family: 'QuicksandBold';
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.celebrity-hero__known-movies {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.celebrity-hero__known-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.celebrity-hero__known-item:hover {
+  transform: translateY(-5px);
+}
+
+.celebrity-hero__known-img {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.75rem;
+}
+
+.celebrity-hero__known-name {
+  font-size: 0.85rem;
+  font-family: 'QuicksandMedium';
+  color: white;
+  display: block;
+  line-height: 1.3;
+}
+
+/* Biography Section */
+.celebrity-biography {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.celebrity-biography::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.celebrity-biography__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Simple Bio Content */
+.bio-content {
+  margin-top: 3rem;
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.bio-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f59e0b, #3b82f6, #10b981);
+  border-radius: 20px 20px 0 0;
+}
+
+.bio-main {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #374151;
+  text-align: justify;
+}
+
+.bio-intro {
+  font-size: 1.4rem;
+  font-family: 'QuicksandSemiBold';
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.bio-intro::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  border-radius: 2px;
+}
+
+.bio-main p {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 3px solid transparent;
+}
+
+.bio-main p:last-child {
+  margin-bottom: 0;
+}
+
+.bio-main p:first-of-type::first-letter {
+  font-size: inherit;
+  font-family: inherit;
+  float: none;
+  line-height: inherit;
+  margin-right: 0;
+  margin-top: 0;
+  color: inherit;
+  text-shadow: none;
+}
+
+/* Filmography Section */
+.celebrity-filmography {
+  padding: 6rem 0;
+  background: white;
+}
+
+.celebrity-filmography__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.filmography-tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 3rem 0 2rem;
+}
+
+.filmography-tab {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  border-radius: 8px;
+  font-family: 'QuicksandSemiBold';
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filmography-tab--active,
+.filmography-tab:hover {
+  border-color: #f59e0b;
+  background: #f59e0b;
+  color: white;
+}
+
+.filmography-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filmography-item {
+  display: grid;
+  grid-template-columns: 80px 120px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.filmography-item:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filmography-item__year {
+  font-size: 1.1rem;
+  font-family: 'QuicksandBold';
+  color: #374151;
+  text-align: center;
+}
+
+.filmography-item__poster {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filmography-item__img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.filmography-item__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filmography-item__title {
+  font-size: 1.3rem;
+  font-family: 'QuicksandBold';
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.filmography-item__role {
+  color: #6b7280;
+  font-family: 'QuicksandMedium';
+  font-size: 1rem;
+}
+
+.filmography-item__meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.filmography-item__rating {
+  color: #f59e0b;
+  font-family: 'QuicksandSemiBold';
+}
+
+.filmography-item__genre {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* Awards Section */
+.celebrity-awards {
+  padding: 6rem 0;
+  background: #f8fafc;
+}
+
+.celebrity-awards__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.awards-timeline {
+  margin-top: 3rem;
+  position: relative;
+}
+
+.awards-timeline:before {
+  content: '';
+  position: absolute;
+  left: 3rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #f59e0b, #d97706);
+}
+
+.award-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.award-item:before {
+  content: '';
+  position: absolute;
+  left: 2.75rem;
+  top: 1rem;
+  width: 12px;
+  height: 12px;
+  background: #f59e0b;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #f59e0b;
+}
+
+.award-item__year {
+  font-size: 1.2rem;
+  font-family: 'QuicksandBold';
+  color: #374151;
+  text-align: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.award-item__content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.award-item__title {
+  font-size: 1.4rem;
+  font-family: 'QuicksandBold';
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.award-item__category {
+  color: #6b7280;
+  font-family: 'QuicksandSemiBold';
+  margin-bottom: 0.25rem;
+}
+
+.award-item__work {
+  color: #9ca3af;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.award-item__status {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-family: 'QuicksandSemiBold';
+}
+
+.award-item__status--won {
+  background: #10b981;
+  color: white;
+}
+
+.award-item__status--nominated {
+  background: #f59e0b;
+  color: white;
+}
+
+.celebrity-hero__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.celebrity-hero__detail-label {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-family: 'QuicksandMedium';
+}
+
+.celebrity-hero__detail-value {
+  font-size: 1.1rem;
+  font-family: 'QuicksandSemiBold';
+  color: white;
+}
+
+.celebrity-hero__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Biography Section */
+.celebrity-biography {
+  padding: 4rem 0;
+  background: #f8fafc;
+}
+
+.celebrity-biography__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-family: 'QuicksandBold';
+  color: #1f2937;
+  margin-bottom: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-radius: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .celebrity-hero__content {
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 968px) {
+  .celebrity-hero {
+    min-height: 60vh;
+    padding: 6rem 0 3rem;
+  }
+  
+  .celebrity-hero__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .celebrity-hero__poster {
+    max-width: 300px;
+    margin: 0 auto;
+    transform: none;
+  }
+  
+  .celebrity-hero__title {
+    font-size: 3rem;
+  }
+  
+  .celebrity-hero__actions {
+    justify-content: center;
+  }
+  
+  .celebrity-hero__known-movies {
+    justify-content: center;
+  }
+  
+  .bio-content {
+    padding: 2rem;
+  }
+  
+  .bio-main p:first-of-type::first-letter {
+    font-size: 3rem;
+  }
+  
+  .filmography-item {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .filmography-item__poster {
+    max-width: 120px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .celebrity-hero__title {
+    font-size: 2.5rem;
+  }
+  
+  .celebrity-hero__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .celebrity-biography__inner {
+    padding: 0 1.5rem;
+  }
+  
+  .bio-content {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .bio-intro {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  
+  .bio-main {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .bio-main p {
+    padding-left: 1rem;
+  }
+  
+  .bio-main p:hover {
+    padding-left: 1.25rem;
+  }
+  
+  .bio-main p:first-of-type::first-letter {
+    font-size: 2.5rem;
+    margin-right: 0.3rem;
+  }
+  
+  .filmography-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .filmography-tab {
+    text-align: center;
+  }
+}
+
+.celebrity-biography__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.celebrity-biography__text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.celebrity-biography__text p {
+  margin-bottom: 1.5rem;
+}
+
+.celebrity-biography__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Career Timeline Section */
+.celebrity-career {
+  padding: 4rem 0;
+  background: white;
+}
+
+.celebrity-career__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.career-timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.career-timeline::before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+}
+
+.career-timeline__item {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.career-timeline__item::before {
+  content: '';
+  position: absolute;
+  left: 1.75rem;
+  top: 0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #3b82f6;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px #3b82f6;
+}
+
+.career-timeline__year {
+  font-size: 1.1rem;
+  font-family: 'QuicksandBold';
+  color: #3b82f6;
+  text-align: center;
+}
+
+.career-timeline__content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.career-timeline__title {
+  font-size: 1.3rem;
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.career-timeline__description {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Movies Section */
+.celebrity-movies {
+  padding: 4rem 0;
+  background: #f8fafc;
+}
+
+.celebrity-movies__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.movie-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.movie-card__poster {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card__img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-card__img {
+  transform: scale(1.05);
+}
+
+.movie-card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-card__overlay {
+  opacity: 1;
+}
+
+.movie-card__play-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.movie-card__play-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.movie-card__play-icon {
+  width: 24px;
+  height: 24px;
+  color: #1e293b;
+  margin-left: 4px;
+}
+
+.movie-card__info {
+  padding: 1.5rem;
+}
+
+.movie-card__title {
+  font-size: 1.2rem;
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.movie-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-card__year {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.movie-card__rating {
+  color: #f59e0b;
+  font-family: 'QuicksandBold';
+  font-size: 0.9rem;
+}
+
+/* Awards Section */
+.celebrity-awards {
+  padding: 4rem 0;
+  background: white;
+}
+
+.celebrity-awards__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.award-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.award-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.award-card__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.award-card__title {
+  font-size: 1.3rem;
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.award-card__event {
+  color: #64748b;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.award-card__movie {
+  color: #3b82f6;
+  font-family: 'QuicksandMedium';
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Related Celebrities Section */
+.related-celebrities {
+  padding: 4rem 0;
+  background: #f8fafc;
+}
+
+.related-celebrities__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.celebrity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.celebrity-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.celebrity-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.celebrity-card--small .celebrity-card__image {
+  height: 250px;
+}
+
+.celebrity-card__image {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.celebrity-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.celebrity-card:hover .celebrity-card__img {
+  transform: scale(1.05);
+}
+
+.celebrity-card__content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.celebrity-card__name {
+  font-size: 1.2rem;
+  font-family: 'QuicksandBold';
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.celebrity-card__profession {
+  color: #64748b;
+  font-size: 0.9rem;
+  font-family: 'QuicksandMedium';
+}
+
+.celebrity-card__bio {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .celebrity-hero__inner,
+  .celebrity-biography__inner,
+  .celebrity-career__inner,
+  .celebrity-movies__inner,
+  .celebrity-awards__inner,
+  .related-celebrities__inner {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .celebrity-hero__content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .celebrity-hero__poster {
+    max-width: 300px;
+    margin: 0 auto;
+    transform: none;
+  }
+  
+  .celebrity-hero__title {
+    font-size: 2.5rem;
+  }
+  
+  .celebrity-hero__details {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  
+  .celebrity-hero__actions {
+    justify-content: center;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .career-timeline::before {
+    left: 1rem;
+  }
+  
+  .career-timeline__item {
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+  }
+  
+  .career-timeline__item::before {
+    left: 0.75rem;
+  }
+  
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .awards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .celebrity-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .celebrity-hero {
+    min-height: 60vh;
+  }
+  
+  .celebrity-hero__inner,
+  .celebrity-biography__inner,
+  .celebrity-career__inner,
+  .celebrity-movies__inner,
+  .celebrity-awards__inner,
+  .related-celebrities__inner {
+    padding: 0 1rem;
+  }
+  
+  .celebrity-hero__content {
+    padding: 2rem 0;
+  }
+  
+  .celebrity-hero__title {
+    font-size: 2rem;
+  }
+  
+  .celebrity-hero__actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .celebrity-hero__actions .btn {
+    width: 100%;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .celebrity-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .career-timeline__content {
+    padding: 1rem;
+  }
+  
+  .award-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Touch-friendly enhancements */
+@media (hover: none) and (pointer: coarse) {
+  .movie-card__overlay {
+    opacity: 1;
+  }
+  
+  .movie-card__play-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .celebrity-card,
+  .movie-card,
+  .award-card {
+    transition: transform 0.2s ease;
+  }
+  
+  .celebrity-card:active,
+  .movie-card:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.celebrity-hero__info > * {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.celebrity-hero__meta {
+  animation-delay: 0.1s;
+}
+
+.celebrity-hero__title {
+  animation-delay: 0.2s;
+}
+
+.celebrity-hero__details {
+  animation-delay: 0.3s;
+}
+
+.celebrity-hero__actions {
+  animation-delay: 0.4s;
+}

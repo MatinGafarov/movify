@@ -573,6 +573,24 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .dashboard-hero__inner,
+  .upload-section__inner,
+  .my-films__inner,
+  .festival-applications__inner {
+    padding: 0 1.5rem;
+  }
+  
+  .dashboard-hero__stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .festival-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-hero {
     padding: 6rem 0 3rem;
@@ -598,6 +616,7 @@
   
   .upload-form__actions {
     flex-direction: column;
+    gap: 1rem;
   }
   
   .films-table__header,
@@ -615,6 +634,12 @@
     grid-template-columns: 1fr;
   }
   
+  .festival-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
   .application-table__header,
   .application-table__row {
     grid-template-columns: 1fr;
@@ -623,6 +648,7 @@
   
   .section-header__filters {
     flex-wrap: wrap;
+    gap: 1rem;
   }
 }
 
@@ -634,12 +660,21 @@
     padding: 0 1rem;
   }
   
+  .dashboard-hero__title {
+    font-size: 1.8rem;
+  }
+  
+  .dashboard-hero__subtitle {
+    font-size: 1rem;
+  }
+  
   .upload-form {
     padding: 1.5rem;
   }
   
   .upload-area {
     padding: 2rem 1rem;
+    font-size: 0.9rem;
   }
   
   .festival-card {
@@ -650,5 +685,84 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+  }
+  
+  .festival-card__actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .section-header__filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .filter-select,
+  .search-input {
+    width: 100%;
+  }
+  
+  .btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-hero__title {
+    font-size: 1.5rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+  
+  .stat-card__number {
+    font-size: 1.5rem;
+  }
+  
+  .upload-form {
+    padding: 1rem;
+  }
+  
+  .festival-card {
+    padding: 1rem;
+  }
+  
+  .section {
+    padding: 2rem 0;
+  }
+}
+
+/* Touch-friendly enhancements */
+@media (hover: none) and (pointer: coarse) {
+  .btn,
+  .festival-card,
+  .stat-card,
+  .upload-area {
+    transition: transform 0.2s ease;
+  }
+  
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  .festival-card:active,
+  .stat-card:active {
+    transform: scale(0.99);
+  }
+  
+  .upload-area:active {
+    transform: scale(0.995);
+  }
+  
+  /* Increase touch targets */
+  .nav__link,
+  .btn,
+  .filter-select {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 }

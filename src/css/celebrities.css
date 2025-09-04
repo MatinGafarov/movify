@@ -169,6 +169,9 @@ main {
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   transition: all 180ms ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .celebrity-card:hover {
@@ -176,6 +179,13 @@ main {
   border-color: #cbd5e1;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.celebrity-card:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 .celebrity-card__image {
